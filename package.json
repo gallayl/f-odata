@@ -1,0 +1,23 @@
+{
+  "name": "f-odata",
+  "version": "0.0.1",
+  "description": "FuryTech.Odata server side implementation for Node.JS",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "OData",
+    "ExpressJS",
+    "TypeScript",
+    "REST"
+  ],
+  "author": "Gallay Lajos",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.35"
+  }
+}
