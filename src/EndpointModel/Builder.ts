@@ -1,3 +1,3 @@
-export default class Builder{
+export class Builder{
     
 }
