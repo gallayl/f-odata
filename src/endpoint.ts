@@ -3,33 +3,47 @@ import * as Express from "express";
 
 export default class Endpoint {
 
-    public GetApiRootBody():string{
+    /**
+     * Returns the API Root response body
+     */
+    public GetApiRootBody(): string {
         return this.apiRootBody;
     }
 
-    public GetMetadataBody():string{
-        return this.metadataBody
+    /**
+     * Returns the $metadata response body
+     */
+    public GetMetadataBody(): string {
+        return this.metadataBody;
     }
 
+    // todo: from modelbuilder
+    private apiRootBody: string = "ApiRootBody";
 
-    private apiRootBody:string = "ApiRootBody";
-    private metadataBody:string = "ApiMetadataBody";
+    // todo: create metadata from modelbuilder
+    private metadataBody: string = "ApiMetadataBody";
 
     private router: Express.Router = Express.Router();
 
     private registerExpressRoute(expressAppRef: Express.Application, route: string) {
-        this.router.get("/", (req, resp)=>{
-            resp.send(200, {message: this.apiRootBody});
+        this.router.get("/", (req, resp) => {
+            resp.send(200, { message: this.apiRootBody });
         });
 
-        this.router.get("/([\$])metadata", (req, resp)=>{
-            resp.send(200, {message: this.metadataBody });
+        this.router.get("/([\$])metadata", (req, resp) => {
+            resp.send(200, { message: this.metadataBody });
         });
 
         expressAppRef.use(`/${route}`, this.router);
 
     }
 
+    /**
+     * Constructs an OData endpoint from the specified models and registers it to an Express application to a specific route
+     * @param expressAppRef The Express application reference to register the OData Endpoint
+     * @param route The root for the OData endpoint (e.g. 'odata.svc')
+     * @param ModelBuilder The OData modelbuilder which defines what entities will be registered into the endpoint
+     */
     constructor(expressAppRef: Express.Application, private route: string, private ModelBuilder: Builder) {
         this.registerExpressRoute(expressAppRef, route);
     }

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "test": "npm run dev-test-watch",
-    "dev-test-watch": "mocha-typescript-watch -p tsconfig.test.json test-js/test/test.js"
+    "dev-test-watch": "mocha-typescript-watch -p tsconfig.test.json test-js/test/endpoint.js"
   },
   "keywords": [
     "OData",

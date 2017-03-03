@@ -8,5 +8,8 @@
         "target": "es2017",
         "declaration": true,
         "sourceMap": true
-    }
+    }, 
+    "files": [
+        "./src/index"
+    ]
 }
