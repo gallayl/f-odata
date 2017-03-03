@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "sourceRoot": "./test",
         "outDir": "./test-js",
         "module": "commonjs",
         "emitDecoratorMetadata": true,
@@ -10,6 +9,6 @@
         "sourceMap": true
     },
     "files": [
-        "./test/index"
+        "./test/index.ts"
     ]
 }

@@ -7,7 +7,7 @@ import chaiHttp = require("chai-http");
 
 
 @suite
-class EndpointTests {
+export class EndpointTests {
 
     private Endpoint: Endpoint;
     private EndpointBuilder: Builder;
