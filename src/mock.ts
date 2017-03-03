@@ -1,18 +1,19 @@
 import Endpoint from "./endpoint";
 import * as Express from "express";
 import { Builder } from "./EndpointModel";
-import { IODataEntity } from "./Interfaces/";
 let app = Express();
 
 let builder = new Builder();
 
 
-class Alma implements IODataEntity{
+class Alma {
+    id: number;
     a:string;
 }
 
 
-let t = builder.EntitySet(Alma, "almák");
+builder.EntityType(Alma, "id");
+builder.EntitySet(Alma, "almák");
 
 let endpoint = new Endpoint(app, "api", builder);
 

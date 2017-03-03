@@ -1,3 +1,6 @@
-export default class EntitySet<T>{
-    Name: string;
+import EntityType from "./EntityType";
+
+export default class EntitySet {
+    EntityType: EntityType;
+    CollectionName: string;
 }
