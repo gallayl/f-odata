@@ -21,42 +21,49 @@ export class EndpointTests {
         chai.use(chaiHttp);
     }
 
-    @test
-    Create() {
+    before() {
         this.EndpointBuilder = new Builder();
         this.Endpoint = new Endpoint(EndpointTests.ExpressApp, this.Route, this.EndpointBuilder);
+    }
+
+    @test
+    Create() {
         chai.expect(this.Endpoint).not.undefined;
     }
 
     @test
-    StartExpress(done:()=>void) {
-        EndpointTests.ExpressApp.listen(3000, ()=> {
+    StartExpress(done: () => void) {
+        EndpointTests.ExpressApp.listen(3000, () => {
             done();
         });
     }
 
     @test
-    "CheckApiRootAvailable"(done:()=>void) {
+    "CheckApiRootAvailable"(done: () => void) {
+
+        let body = this.Endpoint.GetApiRootBody();
+
         chai.request(EndpointTests.ExpressApp)
-            .get("/" +this.Route + "/")
+            .get("/" + this.Route + "/")
             .then(res => {
-                chai.expect(res.body.message).to.eql(this.Endpoint.GetApiRootBody());
+                chai.expect(res.body.message).to.eql(body);
                 done();
             })
-            .catch(err=>{
+            .catch(err => {
                 done();
             });
     }
 
     @test
-    "CheckMetadataAvailable"(done:()=>void) {
+    "CheckMetadataAvailable"(done: () => void) {
+        let body = this.Endpoint.GetMetadataBody();
         chai.request(EndpointTests.ExpressApp)
-            .get("/" +this.Route + "/$metadata")
+            .get("/" + this.Route + "/$metadata")
             .then(res => {
-                chai.expect(res.body.message).to.eql(this.Endpoint.GetMetadataBody());
+                chai.expect(res.body.message).to.eql(body);
                 done();
             })
-            .catch(err=>{
+            .catch(err => {
                 done();
             });
     }

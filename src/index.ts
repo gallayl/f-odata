@@ -1,2 +1,2 @@
-export * from './Endpoint';
+export * from './endpoint';
 export * from './mock';

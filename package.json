@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "npm run dev-test-watch",
+    "test": "npm run dev-test",
+    "coverage": "nyc report --reporter=lcov",
+    "dev-test": "tsc -p tsconfig.test.json && nyc mocha -p tsconfig.test.json test-js/test/index.js",
     "dev-test-watch": "mocha-typescript-watch -p tsconfig.test.json test-js/test/index.js"
+  },
+  "nyc":{
+
   },
   "keywords": [
     "OData",
@@ -25,8 +30,10 @@
     "@types/express": "^4.0.35",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
     "mocha-typescript": "^1.0.22",
+    "nyc": "^10.1.2",
     "typescript": "^2.2.1"
   }
 }

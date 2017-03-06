@@ -23,7 +23,7 @@ export class Builder {
 
     public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName: string): EntitySet {
 
-        let existing = this.EntitySets.find(s => s.CollectionName == entitySetName);
+        let existing = this.EntitySets.find(s => s.CollectionName === entitySetName);
         if (existing) {
             if (existing.EntityType.Name != entityTypeClass.name) {
                 throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeClass.name}. 
@@ -32,7 +32,7 @@ export class Builder {
             return existing;
         }
 
-        let entityType = this.EntityTypes.find(e => e.Name == entityTypeClass.name);
+        let entityType = this.EntityTypes.find(e => e.Name === entityTypeClass.name);
         if (!entityType) {
             throw new Error(`Entity type not yet added for type '${entityTypeClass.name}', please add it first.`)
         }
