@@ -27,11 +27,15 @@ export default class Endpoint {
 
     private registerExpressRoute(expressAppRef: Express.Application, route: string) {
         this.router.get("/", (req, resp) => {
-            resp.send(200, { message: this.apiRootBody });
+            resp
+                .status(200)
+                .send({ message: this.apiRootBody });
         });
 
         this.router.get("/([\$])metadata", (req, resp) => {
-            resp.send(200, { message: this.metadataBody });
+            resp
+                .status(200)
+                .send({ message: this.metadataBody });
         });
 
         expressAppRef.use(`/${route}`, this.router);
