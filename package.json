@@ -7,7 +7,7 @@
     "build": "tsc",
     "test": "npm run dev-test",
     "coverage": "nyc report --reporter=lcov",
-    "dev-test": "tsc -p tsconfig.test.json && nyc mocha -p tsconfig.test.json test-js/test/index.js",
+    "dev-test": "tsc && tsc -p tsconfig.test.json && nyc mocha -p tsconfig.test.json test-js/test/index.js",
     "dev-test-watch": "mocha-typescript-watch -p tsconfig.test.json test-js/test/index.js"
   },
   "nyc":{
