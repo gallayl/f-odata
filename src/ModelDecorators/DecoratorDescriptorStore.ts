@@ -1,16 +1,8 @@
-export enum DescriptorType {
-    PrimaryKey,
-    ForeignKey
-}
-
-export abstract class DescriptorEntry {
-    readonly abstract Type: DescriptorType;
-}
 
 export class DecoratorDescriptor {
     Object: Object;
     ClassName: string;
-    Entries: DescriptorEntry[];
+    Entries: Object[];
 }
 
 export class DecoratorDescriptorStore {
@@ -33,7 +25,7 @@ export class DecoratorDescriptorStore {
      * Adds an entry for the Object if it not exist, appends the Entries otherwise.
      * @param newValue The new Object and Key values
      */
-    public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: DescriptorEntry) {
+    public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: Object) {
         
         let found = this.GetDescriptor(entityTypeClass);      
         if (!found) {

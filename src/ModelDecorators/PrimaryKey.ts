@@ -1,8 +1,8 @@
-import { DescriptorType, DescriptorEntry, DecoratorDescriptorStore } from './DecoratorDescriptorStore';
+import { DecoratorDescriptorStore } from './DecoratorDescriptorStore';
 
-class PrimaryKeyDescriptorEntry implements DescriptorEntry {
+class PrimaryKeyDescriptorEntry {
     FieldName: string;
-    Type: DescriptorType;
+    Type: string;
 }
 
 /**
@@ -18,8 +18,8 @@ export class PrimaryKeys {
         if (!found) {
             throw new Error(`Key not registered for '${entityTypeClass.name}'`);
         }
-        let entry = <PrimaryKeyDescriptorEntry>found.Entries.find(a => a.Type == DescriptorType.PrimaryKey);
-        console.log(entry);
+        console.log("Entries",found.Entries);
+        let entry = <PrimaryKeyDescriptorEntry>found.Entries.find(a => (<PrimaryKeyDescriptorEntry>a).Type == "PrimaryKey");
         return entry.FieldName;
     }
 
@@ -41,6 +41,6 @@ export function PrimaryKey(target: Object, propertyKey: string) {
     console.log(`PrimaryKeyDecorator for '${target.constructor.name}' is property '${propertyKey}'`);
     DecoratorDescriptorStore.Add(<any>target, <PrimaryKeyDescriptorEntry>{
         FieldName: propertyKey,
-        Type: DescriptorType.PrimaryKey
+        Type: "PrimaryKey"
     });
 }
