@@ -26,8 +26,7 @@ export class DecoratorDescriptorStore {
      * @param newValue The new Object and Key values
      */
     public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: Object) {
-        
-        let found = this.GetDescriptor(entityTypeClass);      
+        let found = this.GetDescriptor(entityTypeClass);
         if (!found) {
             this.descriptorsInternal.push({
                 ClassName: entityTypeClass.name,
@@ -36,7 +35,7 @@ export class DecoratorDescriptorStore {
             });
 
         } else {
-            found.Entries.push(descriptorEntry)
+            found.Entries.push(descriptorEntry);
         }
     }
 }

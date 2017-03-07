@@ -97,6 +97,6 @@ export class EndpointBuilderTests {
 
         chai.expect(() => {
             b.EntitySet(B, "As");
-        }).to.throw(Error)
+        }).to.throw(Error);
     }
 }

@@ -34,7 +34,7 @@ export class PrimaryKeyTest {
     }
 
     @test("HasForShouldReturnTrueIfFound")
-    HasForFound(){
+    HasForFound() {
         chai.expect(PrimaryKeys.HasFor(HasKey)).equals(true);
     }
 

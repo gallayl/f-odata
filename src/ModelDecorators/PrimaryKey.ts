@@ -1,4 +1,4 @@
-import { DecoratorDescriptorStore } from './DecoratorDescriptorStore';
+import { DecoratorDescriptorStore } from "./DecoratorDescriptorStore";
 
 class PrimaryKeyDescriptorEntry {
     FieldName: string;
@@ -18,8 +18,9 @@ export class PrimaryKeys {
         if (!found) {
             throw new Error(`Key not registered for '${entityTypeClass.name}'`);
         }
-        console.log("Entries",found.Entries);
-        let entry = <PrimaryKeyDescriptorEntry>found.Entries.find(a => (<PrimaryKeyDescriptorEntry>a).Type == "PrimaryKey");
+        console.log("Entries", found.Entries);
+        // toDo: to typeguard
+        let entry = <PrimaryKeyDescriptorEntry>found.Entries.find(a => (<PrimaryKeyDescriptorEntry>a).Type === "PrimaryKey");
         return entry.FieldName;
     }
 
