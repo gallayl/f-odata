@@ -14,9 +14,6 @@ export class EndpointTests {
     private static ExpressApp: Express.Application = Express();
     private Route: string = "api";
 
-    /**
-     *
-     */
     constructor() {
         chai.use(chaiHttp);
     }

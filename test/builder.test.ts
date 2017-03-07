@@ -2,7 +2,7 @@ import { suite, test } from "mocha-typescript";
 import { Builder } from "../src/EndpointModel";
 import * as chai from "chai";
 import chaiHttp = require("chai-http");
-import { PrimaryKey } from "../src/ModelDecorators";
+import { PrimaryKey, Property } from "../src/ModelDecorators";
 
 class A {
     @PrimaryKey
@@ -16,8 +16,13 @@ class B {
     Name: any;
 }
 
-class WithoutKey{
+class WithoutKey {
     Id: number;
+}
+
+class WithoutKeyWithProperty{
+    @Property
+    prop1: string;
 }
 
 @suite("OData Endpoint builder tests")
@@ -54,6 +59,10 @@ export class EndpointBuilderTests {
         chai.assert.throw(() => {
             this.b.EntityType(WithoutKey);
         }, Error);
+
+        chai.assert.throw(()=>{
+            this.b.EntityType(WithoutKeyWithProperty);
+        }, Error);
     }
 
     @test("Register EntityType 'A' and get EntityType 'A' without keyfield")
@@ -82,13 +91,12 @@ export class EndpointBuilderTests {
     RegisterAandAsAndGetA() {
         this.b.EntityType(A);
         this.b.EntitySet(A, "As");
-        
 
-        // let type = this.b.EntityType(A);
-        // let set = this.b.EntitySet(A, "As");
+        let type = this.b.EntityType(A);
+        let set = this.b.EntitySet(A, "As");
 
-        // chai.expect(set.CollectionName).equals("As");
-        // chai.expect(set.EntityType.Name).equals(type.Name);
+        chai.expect(set.Name).equals("As");
+        chai.expect(set.EntityType).equals(type.Name);
     }
 
     @test("Register EntitySet for entity 'A' without defining EntityType 'A' should throw an error")

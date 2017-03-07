@@ -4,7 +4,7 @@ class PrimaryKeyDescriptorEntry {
     PrimaryKey: string;
 }
 
-function isPrimaryKeyDescriptorEntry(descriptor: any): descriptor is PrimaryKeyDescriptorEntry{
+function isPrimaryKeyDescriptorEntry(descriptor: any): descriptor is PrimaryKeyDescriptorEntry {
     return (<PrimaryKeyDescriptorEntry>descriptor).PrimaryKey !== undefined;
 }
 
@@ -23,7 +23,7 @@ export class PrimaryKeys {
             throw new Error(`Descriptor not registered for '${entityTypeClass.name}'`);
         }
         let entry = <PrimaryKeyDescriptorEntry>descriptor.Entries.find(a => isPrimaryKeyDescriptorEntry(a));
-        if (!entry){
+        if (!entry) {
             throw new Error(`No primary key registered for '${entityTypeClass.name}'`);
         }
         return entry.PrimaryKey;

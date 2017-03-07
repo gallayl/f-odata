@@ -28,6 +28,21 @@ class TwoProperties{
 @suite("OData Property decorator and store tests")
 export class PropertyTests {
 
+    @test("HasFor should return false if model doesn't have properties declared")
+    hasForShouldReturnFalse(){
+        let result = Properties.HasFor(NoPropertiesDefined);
+        chai.expect(result).equals(false);
+    }
+
+    @test("HasFor should return true if model has properties declared")
+    hasForShouldReturTrue() {
+        let result = Properties.HasFor(OneProperty);
+        chai.expect(result).equals(true);
+
+        let res2 = Properties.HasFor(TwoProperties);
+        chai.expect(res2).equals(true);
+    }
+
     @test("Should get an empty array if no property defined")
     shouldGetEmptyArrayIfPropertyNotSpecified() {
         let result = Properties.GetFor(NoPropertiesDefined);

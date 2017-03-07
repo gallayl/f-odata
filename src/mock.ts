@@ -1,14 +1,10 @@
 import Endpoint from "./endpoint";
 import * as Express from "express";
 import { Builder } from "./EndpointModel";
-import { PrimaryKey, Property, ODataEntity } from "./ModelDecorators";
+import { PrimaryKey, Property } from "./ModelDecorators";
 let app = Express();
 
 let builder = new Builder();
-
-@ODataEntity({
-    Namespace: "Models"
-})
 class Alma {
 
     @PrimaryKey

@@ -21,7 +21,7 @@ export class Properties {
 
     public static HasFor<T>(entityTypeClass: { new (): T }): boolean {
         let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-        return found && found.Entries && found.Entries.length > 0;
+        return (found && found.Entries && found.Entries.length > 0) ? true : false;
     }
 }
 

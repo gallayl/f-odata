@@ -11,13 +11,13 @@ export class Builder {
     constructor(private namespaceRoot: string = "Api") { }
 
     public GetModel(): SchemaType {
-        return <SchemaType>{
+        return {
             Namespace: this.namespaceRoot,
             EntityType: this.EntityTypes,
             EntityContainer: [{
                 EntitySet: this.EntitySets
             }]
-        };
+        } as SchemaType;
     }
 
     public EntityType<T>(entityTypeClass: { new (): T }): TEntityType {
@@ -30,28 +30,26 @@ export class Builder {
         }
         let keyfield = PrimaryKeys.GetFor(entityTypeClass);
 
-        if (!keyfield) {
-            throw new Error(`Key field(s) are required on the first definition for EntityType '${entityTypeName}'`);
-        }
-
-        let entityType = <TEntityType>{
+        let entityType = {
             Name: entityTypeName,
             Property: [],
             NavigationProperty: []
-        };
+        } as TEntityType;
 
-        entityType.Key = <TEntityKeyElement[]>[{
+        entityType.Key = [{
             PropertyRef: [
-                {"Name": keyfield},
+                { "Name": keyfield },
             ]
-        }];
+        }] as TEntityKeyElement[];
 
-        Properties.GetFor(entityTypeClass).forEach(prop=>{
-            entityType.Property.push(<TProperty>{
-                "Name": prop.PropertyName,
-                "Type": prop.EdmType.toString()
+        let odataProperties = Properties.GetFor(entityTypeClass);
+        let tProperties = odataProperties.map(prop => <TProperty>{
+                Name: prop.PropertyName,
+                Type: prop.EdmType.toString()
             });
-        });
+
+        entityType.Property = tProperties;
+
 
         this.EntityTypes.push(entityType);
         return entityType;
