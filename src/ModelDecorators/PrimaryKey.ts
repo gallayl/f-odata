@@ -1,8 +1,11 @@
 import { DecoratorDescriptorStore } from "./DecoratorDescriptorStore";
 
 class PrimaryKeyDescriptorEntry {
-    FieldName: string;
-    Type: string;
+    PrimaryKey: string;
+}
+
+function isPrimaryKeyDescriptorEntry(descriptor: any): descriptor is PrimaryKeyDescriptorEntry{
+    return (<PrimaryKeyDescriptorEntry>descriptor).PrimaryKey !== undefined;
 }
 
 /**
@@ -14,14 +17,16 @@ export class PrimaryKeys {
      * @param entityTypeClass The class to get the key for.
      */
     public static GetFor<T>(entityTypeClass: { new (): T }): string {
-        let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-        if (!found) {
-            throw new Error(`Key not registered for '${entityTypeClass.name}'`);
+
+        let descriptor = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+        if (!descriptor) {
+            throw new Error(`Descriptor not registered for '${entityTypeClass.name}'`);
         }
-        console.log("Entries", found.Entries);
-        // toDo: to typeguard
-        let entry = <PrimaryKeyDescriptorEntry>found.Entries.find(a => (<PrimaryKeyDescriptorEntry>a).Type === "PrimaryKey");
-        return entry.FieldName;
+        let entry = <PrimaryKeyDescriptorEntry>descriptor.Entries.find(a => isPrimaryKeyDescriptorEntry(a));
+        if (!entry){
+            throw new Error(`No primary key registered for '${entityTypeClass.name}'`);
+        }
+        return entry.PrimaryKey;
     }
 
     /**
@@ -40,8 +45,8 @@ export class PrimaryKeys {
  */
 export function PrimaryKey(target: Object, propertyKey: string) {
     console.log(`PrimaryKeyDecorator for '${target.constructor.name}' is property '${propertyKey}'`);
+
     DecoratorDescriptorStore.Add(<any>target, <PrimaryKeyDescriptorEntry>{
-        FieldName: propertyKey,
-        Type: "PrimaryKey"
+        PrimaryKey: propertyKey
     });
 }

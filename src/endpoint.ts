@@ -1,6 +1,5 @@
 import { Builder } from "./EndpointModel";
 import * as Express from "express";
-import * as js2xmlparser from "js2xmlparser";
 
 export default class Endpoint {
 
@@ -15,7 +14,7 @@ export default class Endpoint {
      * Returns the $metadata response body
      */
     public GetMetadataBody(): string {
-        return js2xmlparser.parse("model", this.ModelBuilder.GetModel());
+        return JSON.stringify(this.ModelBuilder.GetModel());
     }
 
     // todo: from modelbuilder
@@ -26,14 +25,14 @@ export default class Endpoint {
     private registerExpressRoute(expressAppRef: Express.Application, route: string) {
         this.router.get("/", (req, resp) => {
             resp
-                .set("Content-Type", "text/xml")
+                // .set("Content-Type", "text/xml")
                 .status(200)
                 .send(this.GetApiRootBody());
         });
 
         this.router.get("/([\$])metadata", (req, resp) => {
             resp
-                .set("Content-Type", "text/xml")
+                // .set("Content-Type", "text/xml")
                 .status(200)
                 .send(this.GetMetadataBody());
         });

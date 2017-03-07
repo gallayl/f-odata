@@ -70,7 +70,7 @@ interface AnnotationType extends _AnnotationType { constructor: { new(): Annotat
 export type binary = string;
 type _binary = Primitive._string;
 
-export type boolean = boolean;
+// export type boolean = boolean;
 type _boolean = Primitive._boolean;
 
 export type date = Date;

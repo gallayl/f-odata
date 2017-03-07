@@ -10,7 +10,7 @@
     "dev-test": "tsc && tsc -p tsconfig.test.json && nyc mocha -p tsconfig.test.json test-js/test/index.js",
     "dev-test-watch": "mocha-typescript-watch -p tsconfig.test.json test-js/test/index.js",
     "mock": "tsc && node dist/mock.js",
-    "cxsd": "cxsd"
+    "cxsd": "cxsd http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/schemas/edm.xsd"
   },
   "nyc": {},
   "keywords": [
@@ -22,8 +22,7 @@
   "author": "Gallay Lajos",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.0",
-    "js2xmlparser": "^3.0.0"
+    "express": "^4.15.0"
   },
   "devDependencies": {
     "@types/chai": "^3.4.35",

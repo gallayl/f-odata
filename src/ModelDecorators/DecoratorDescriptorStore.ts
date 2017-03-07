@@ -1,7 +1,6 @@
 
 export class DecoratorDescriptor {
-    Object: Object;
-    ClassName: string;
+    Object: any;
     Entries: Object[];
 }
 
@@ -17,7 +16,11 @@ export class DecoratorDescriptorStore {
      * @param obj The object to get the DecoratorDescriptor for.
      */
     public static GetDescriptor<T>(obj: { new (): T }): DecoratorDescriptor {
-        return this.descriptorsInternal.find(k => k.Object.constructor === obj);
+        return this.descriptorsInternal.filter(k => obj === k.Object || obj.prototype === k.Object)[0];
+    }
+
+    public static GetName<T>(obj: { new (): T }): string{
+        return this.GetDescriptor(obj).Object.constructor.name;
     }
 
     /**
@@ -25,11 +28,10 @@ export class DecoratorDescriptorStore {
      * Adds an entry for the Object if it not exist, appends the Entries otherwise.
      * @param newValue The new Object and Key values
      */
-    public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: Object) {
+    public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: any) {
         let found = this.GetDescriptor(entityTypeClass);
         if (!found) {
             this.descriptorsInternal.push({
-                ClassName: entityTypeClass.name,
                 Object: entityTypeClass,
                 Entries: [descriptorEntry]
             });
