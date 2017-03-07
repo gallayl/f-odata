@@ -19,6 +19,10 @@ export class DecoratorDescriptorStore {
         return this.descriptorsInternal.filter(k => obj === k.Object || obj.prototype === k.Object)[0];
     }
 
+    /**
+     * Gets the Entity Name for the specified model class
+     * @param obj The model to get the EntityName for
+     */
     public static GetName<T>(obj: { new (): T }): string {
         return this.GetDescriptor(obj).Object.constructor.name;
     }
