@@ -16,11 +16,12 @@ export class Properties {
      * @param entityTypeClass The model class to get the properties decorated with @Property
      */
     public static GetFor<T>(entityTypeClass: { new (): T }): ODataPropertyDesrciptorEntry[] {
-        let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-        if (!found) {
+        try{
+            let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+            return found.Entries.filter(a => isODataPropertyDesrciptorEntry(a)).map(a => <ODataPropertyDesrciptorEntry>a);
+        } catch (e){
             return [];
         }
-        return found.Entries.filter(a => isODataPropertyDesrciptorEntry(a)).map(a => <ODataPropertyDesrciptorEntry>a);
     }
 
     /**
@@ -28,8 +29,13 @@ export class Properties {
      * @param entityTypeClass The model class to check
      */
     public static HasFor<T>(entityTypeClass: { new (): T }): boolean {
-        let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-        return (found && found.Entries && found.Entries.length > 0) ? true : false;
+        try{
+            let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+            return (found && found.Entries && found.Entries.length > 0) ? true : false;
+        } catch (e) {
+            return false;
+        }
+
     }
 }
 

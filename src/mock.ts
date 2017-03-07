@@ -1,7 +1,7 @@
 import Endpoint from "./endpoint";
 import * as Express from "express";
 import { Builder } from "./EndpointModel";
-import { PrimaryKey, Property } from "./ModelDecorators";
+import { PrimaryKey, Property, ForeignKey } from "./ModelDecorators";
 let app = Express();
 
 let builder = new Builder("Api");
@@ -12,6 +12,10 @@ class Alma {
     @Property
     a: string;
     b: string;
+
+    almaKey:number;
+    @ForeignKey("almaKey")
+    childAlma: Alma;
 }
 
 builder.EntityType(Alma);
