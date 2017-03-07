@@ -2,7 +2,7 @@
   "name": "f-odata",
   "version": "0.0.1",
   "description": "FuryTech.Odata server side implementation for Node.JS",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "npm run dev-test",
@@ -13,6 +13,9 @@
     "cxsd": "cxsd http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/schemas/edm.xsd"
   },
   "nyc": {},
+  "repository": {
+    "url": "git@github.com:gallayl/f-odata.git"
+  },
   "keywords": [
     "OData",
     "ExpressJS",

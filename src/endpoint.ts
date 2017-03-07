@@ -22,7 +22,7 @@ export default class Endpoint {
 
     private router: Express.Router = Express.Router();
 
-    private registerExpressRoute(expressAppRef: Express.Application, route: string) {
+    private registerExpressRoute(expressAppRef: Express.Application) {
         this.router.get("/", (req, resp) => {
             resp
                 // .set("Content-Type", "text/xml")
@@ -37,7 +37,7 @@ export default class Endpoint {
                 .send(this.GetMetadataBody());
         });
 
-        expressAppRef.use(`/${route}`, this.router);
+        expressAppRef.use(`/${this.ModelBuilder.NameSpaceRoot}`, this.router);
 
     }
 
@@ -47,7 +47,7 @@ export default class Endpoint {
      * @param route The root for the OData endpoint (e.g. 'odata.svc')
      * @param ModelBuilder The OData modelbuilder which defines what entities will be registered into the endpoint
      */
-    constructor(expressAppRef: Express.Application, private route: string, private ModelBuilder: Builder) {
-        this.registerExpressRoute(expressAppRef, route);
+    constructor(expressAppRef: Express.Application, private ModelBuilder: Builder) {
+        this.registerExpressRoute(expressAppRef);
     }
 }

@@ -8,11 +8,11 @@ export class Builder {
     private EntityTypes: TEntityType[] = [];
     private EntitySets: TEntitySet[] = [];
 
-    constructor(private namespaceRoot: string = "Api") { }
+    constructor(public NameSpaceRoot:string) { }
 
     public GetModel(): SchemaType {
         return {
-            Namespace: this.namespaceRoot,
+            Namespace: this.NameSpaceRoot,
             EntityType: this.EntityTypes,
             EntityContainer: [{
                 EntitySet: this.EntitySets

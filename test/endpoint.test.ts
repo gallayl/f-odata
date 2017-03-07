@@ -19,8 +19,8 @@ export class EndpointTests {
     }
 
     before() {
-        this.EndpointBuilder = new Builder();
-        this.Endpoint = new Endpoint(EndpointTests.ExpressApp, this.Route, this.EndpointBuilder);
+        this.EndpointBuilder = new Builder(this.Route);
+        this.Endpoint = new Endpoint(EndpointTests.ExpressApp, this.EndpointBuilder);
     }
 
     @test

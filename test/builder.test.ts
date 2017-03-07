@@ -35,17 +35,17 @@ export class EndpointBuilderTests {
     }
 
     before() {
-        this.b = new Builder();
+        this.b = new Builder("api");
     }
 
     @test("Register EntityType 'A'")
     RegisterClassA() {
-        new Builder().EntityType(A);
+        new Builder("api").EntityType(A);
     }
 
     @test("Register EntityType 'B'")
     RegisterClassB() {
-        new Builder().EntityType(B);
+        new Builder("api").EntityType(B);
     }
 
     @test("Register EntityType 'A' and EntityType 'B' into the same builder")
@@ -108,7 +108,7 @@ export class EndpointBuilderTests {
 
     @test("Register Type 'A','B', set 'As' and register B into As should throw mismatch error")
     RegisterEntitySetDifferentTypeMismatch() {
-        let b = new Builder();
+        let b = new Builder("api");
         b.EntityType(A);
         b.EntityType(B);
         b.EntitySet(A, "As");
