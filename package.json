@@ -8,6 +8,7 @@
     "pretest": "tsc -p tsconfig.test.json",
     "test": "nyc mocha -p tsconfig.test.json test-js/test/index.js",
     "posttest": "nyc report --reporter=json && codecov -f coverage/*.json",
+    "test:watch": "mocha-typescript-watch -p tsconfig.test.json ./test-js/test/index.js",
     "mock": "tsc && node dist/mock.js",
     "cxsd": "cxsd http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/schemas/edm.xsd"
   },
