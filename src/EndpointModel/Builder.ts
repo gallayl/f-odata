@@ -2,14 +2,23 @@ import { TEntityType, TEntitySet, TEntityKeyElement, TProperty, SchemaType } fro
 import { PrimaryKeys, Properties } from "../ModelDecorators";
 import { DecoratorDescriptorStore } from "../ModelDecorators/DecoratorDescriptorStore";
 
+/**
+ * The Builder class provides you an API to create OData ShcemaTypes
+ */
 export class Builder {
-
 
     private EntityTypes: TEntityType[] = [];
     private EntitySets: TEntitySet[] = [];
 
+    /**
+     * The Builder class provides you an API to create OData ShcemaTypes
+     * @param NameSpaceRoot The root of the public Express route where the Builder will be accessible
+     */
     constructor(public NameSpaceRoot:string) { }
 
+    /**
+     * Gets the SchemaType based on the provided EntityTypes, EntitySets, etc...
+     */
     public GetModel(): SchemaType {
         return {
             Namespace: this.NameSpaceRoot,
@@ -20,6 +29,11 @@ export class Builder {
         } as SchemaType;
     }
 
+    
+    /**
+     * Returns an EntityType for the model class (and registers it to the Builder is neccessary)
+     * @param entityTypeClass The model class for the EntityType. @PrimaryKey is required.
+     */
     public EntityType<T>(entityTypeClass: { new (): T }): TEntityType {
 
         let entityTypeName = DecoratorDescriptorStore.GetName(entityTypeClass);
@@ -55,6 +69,11 @@ export class Builder {
         return entityType;
     }
 
+    /**
+     * Gets an EntitySet with a specified name for an EntityType. Will be registered to the builder if neccessary
+     * @param entityTypeClass entityTypeClass The model class for the EntitySet. Register as an EntityType before adding an EntitySet
+     * @param entitySetName The collection name (will be part of the API URL)
+     */
     public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName: string): TEntitySet {
 
         let existing = this.EntitySets.find(s => s.Name === entitySetName);
