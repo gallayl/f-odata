@@ -1,10 +1,19 @@
 import EntitySet from "./EntitySet";
 import EntityType from "./EntityType";
+import { SchemaType } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
 
 export class Builder {
 
     private EntityTypes: EntityType[] = [];
     private EntitySets: EntitySet[] = [];
+
+    public GetModel(){
+        let metadata = Schema
+        return {
+            EntityTypes: this.EntityTypes,
+            EntitySets: this.EntitySets
+        }
+    }
 
     public EntityType<K extends keyof T, T>(entityTypeClass: { new (): T }, keyfield?: K | K[]): EntityType {
         let existing = this.EntityTypes.find(t => t.Name === entityTypeClass.name);
