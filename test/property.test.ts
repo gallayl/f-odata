@@ -58,7 +58,6 @@ export class PropertyTests {
     @test("Should get 2 if 2 property and a primary key is defined")
     shouldGetTwo() {
         let result = Properties.GetFor(TwoProperties);
-        console.log(result);
         chai.expect(result.length).equals(2);
     }
 

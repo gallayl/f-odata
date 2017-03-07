@@ -44,8 +44,6 @@ export class PrimaryKeys {
  * @param propertyKey The property that should be a primary key
  */
 export function PrimaryKey(target: Object, propertyKey: string) {
-    console.log(`PrimaryKeyDecorator for '${target.constructor.name}' is property '${propertyKey}'`);
-
     DecoratorDescriptorStore.Add(<any>target, <PrimaryKeyDescriptorEntry>{
         PrimaryKey: propertyKey
     });

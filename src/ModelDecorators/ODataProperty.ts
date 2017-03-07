@@ -26,7 +26,6 @@ export class Properties {
 }
 
 export function Property(target: Object, propertyKey: string) {
-    console.log(`Property '${propertyKey}' added to '${target.constructor.name}'`);
     DecoratorDescriptorStore.Add(<any>target, <ODataPropertyDesrciptorEntry>{
         PropertyName: propertyKey,
         EdmType: EdmType.Unknown
