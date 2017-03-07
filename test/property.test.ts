@@ -16,7 +16,7 @@ class OneProperty {
     Prop1: string;
 }
 
-class TwoProperties{
+class TwoProperties {
     @PrimaryKey
     Id: number;
     @Property
@@ -29,7 +29,7 @@ class TwoProperties{
 export class PropertyTests {
 
     @test("HasFor should return false if model doesn't have properties declared")
-    hasForShouldReturnFalse(){
+    hasForShouldReturnFalse() {
         let result = Properties.HasFor(NoPropertiesDefined);
         chai.expect(result).equals(false);
     }

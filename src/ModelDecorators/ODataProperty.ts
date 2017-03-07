@@ -6,7 +6,7 @@ export class ODataPropertyDesrciptorEntry {
     EdmType: EdmType;
 }
 
-function isODataPropertyDesrciptorEntry(obj: any): obj is ODataPropertyDesrciptorEntry{
+function isODataPropertyDesrciptorEntry(obj: any): obj is ODataPropertyDesrciptorEntry {
     return obj.PropertyName !== undefined && obj.EdmType !== undefined;
 }
 
@@ -16,7 +16,7 @@ export class Properties {
         if (!found) {
             return [];
         }
-        return found.Entries.filter(a => isODataPropertyDesrciptorEntry(a)).map(a=> <ODataPropertyDesrciptorEntry>a);
+        return found.Entries.filter(a => isODataPropertyDesrciptorEntry(a)).map(a => <ODataPropertyDesrciptorEntry>a);
     }
 
     public static HasFor<T>(entityTypeClass: { new (): T }): boolean {

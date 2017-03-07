@@ -19,7 +19,7 @@ export class DecoratorDescriptorStore {
         return this.descriptorsInternal.filter(k => obj === k.Object || obj.prototype === k.Object)[0];
     }
 
-    public static GetName<T>(obj: { new (): T }): string{
+    public static GetName<T>(obj: { new (): T }): string {
         return this.GetDescriptor(obj).Object.constructor.name;
     }
 

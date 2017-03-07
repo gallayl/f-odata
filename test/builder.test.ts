@@ -20,7 +20,7 @@ class WithoutKey {
     Id: number;
 }
 
-class WithoutKeyWithProperty{
+class WithoutKeyWithProperty {
     @Property
     prop1: string;
 }
@@ -60,7 +60,7 @@ export class EndpointBuilderTests {
             this.b.EntityType(WithoutKey);
         }, Error);
 
-        chai.assert.throw(()=>{
+        chai.assert.throw(() => {
             this.b.EntityType(WithoutKeyWithProperty);
         }, Error);
     }
