@@ -20,11 +20,12 @@ export class ForeignKeys {
 }
 
 
-export function ForeignKey(foreignKeyFieldName: string) {
+export function ForeignKey<T>(foreignClassType: { new (): T }, foreignKeyFieldName: string) {
+    
     return function (target: any, propertyName: string) {
         DecoratorDescriptorStore.Add(target,<ForeignKeyDescriptorEntry>{
             ForeignKeyField: foreignKeyFieldName,
-            ReferenceName: ""
+            ReferenceName: foreignClassType.name
         });
-    }
+    };
 }

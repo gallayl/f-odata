@@ -5,6 +5,12 @@ import { PrimaryKey, Property, ForeignKey } from "./ModelDecorators";
 let app = Express();
 
 let builder = new Builder("Api");
+
+class OtherClass {
+    @PrimaryKey
+    id: number;
+    val: string;
+}
 class Alma {
 
     @PrimaryKey
@@ -13,14 +19,16 @@ class Alma {
     a: string;
     b: string;
 
-    almaKey:number;
-    @ForeignKey("almaKey")
-    childAlma: Alma;
+    otherKey:number;
+    @ForeignKey(OtherClass, "almaKey")
+    otherClass: OtherClass;
 }
 
 builder.EntityType(Alma);
 builder.EntitySet(Alma, "almák");
 
 let endpoint = new Endpoint(app, builder);
+
+endpoint.GetApiRootBody.toString();
 
 app.listen(1111);
