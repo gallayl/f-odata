@@ -8,9 +8,11 @@
             "type": "node",
             "request": "launch",
             "name": "Debug Mock",
-            "program": "${workspaceRoot}\\dist\\mock.js",
+            "program": "${workspaceRoot}\\src\\mock.ts",
             "sourceMaps": true,
-            "outFiles": []
+            "outFiles": [
+                "${workspaceRoot}\\dist\\mock.js"
+            ]
         },
         {
             "type": "node",
