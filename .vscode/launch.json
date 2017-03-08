@@ -7,11 +7,12 @@
         {
             "type": "node",
             "request": "launch",
+            "preLaunchTask": "build",
             "name": "Debug Mock",
             "program": "${workspaceRoot}\\src\\mock.ts",
             "sourceMaps": true,
             "outFiles": [
-                "${workspaceRoot}\\dist\\mock.js"
+                "${workspaceRoot}\\dist\\**\\*.js"
             ]
         },
         {
