@@ -1,4 +1,4 @@
-import { TEntityType, TEntitySet, TEntityKeyElement, TProperty, SchemaType } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
+import { TEntityType, TEntitySet, TEntityKeyElement, TProperty, SchemaType, TFunction } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
 import { PrimaryKeys, Properties } from "../ModelDecorators";
 import { DecoratorDescriptorStore } from "../ModelDecorators/DecoratorDescriptorStore";
 
@@ -9,6 +9,8 @@ export class Builder {
 
     private EntityTypes: TEntityType[] = [];
     private EntitySets: TEntitySet[] = [];
+
+    private Functions: TFunction[] = [];
 
     /**
      * The Builder class provides you an API to create OData ShcemaTypes
@@ -29,7 +31,6 @@ export class Builder {
         } as SchemaType;
     }
 
-    
     /**
      * Returns an EntityType for the model class (and registers it to the Builder is neccessary)
      * @param entityTypeClass The model class for the EntityType. @PrimaryKey is required.
@@ -99,5 +100,27 @@ export class Builder {
         };
         this.EntitySets.push(newEntitySet);
         return newEntitySet;
+    }
+
+    public Function<T>( functionMethod: (...ARGS) => T ):TFunction {
+
+
+        // let bindingParameterName = DecoratorDescriptorStore.GetName(bindingParameter);
+
+        // let tA = {
+        //     Name: name,
+        //     IsBound: isBound,
+        //     Parameter:[
+        //         {Name: "bindingParameter", Type: bindingParameterName}
+        //     ],
+        //     ReturnType: {
+        //         Type: returnType.name
+        //     }
+
+        // } as TAction;
+
+        // this.Actions.push(tA);
+
+        return null;
     }
 }

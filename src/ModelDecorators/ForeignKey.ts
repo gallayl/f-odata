@@ -21,7 +21,6 @@ export class ForeignKeys {
 
 
 export function ForeignKey<T>(foreignClassType: { new (): T }, foreignKeyFieldName: string) {
-    
     return function (target: any, propertyName: string) {
         DecoratorDescriptorStore.Add(target,<ForeignKeyDescriptorEntry>{
             ForeignKeyField: foreignKeyFieldName,
