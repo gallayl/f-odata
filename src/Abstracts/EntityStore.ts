@@ -1,8 +1,6 @@
 import { ODataGetOperation, ODataQuery } from "../Operations";
 import { PrimaryKeys, Properties, ODataPropertyDesrciptorEntry, ForeignKeys, ForeignKeyDescriptorEntry } from "../ModelDecorators";
 
-export type FilterEvaluator<T> = (entity:T)=>boolean;
-
 export abstract class EntityStore<EntityType, PrimaryKeyType>{
 
     protected readonly PrimaryKeyName: string;
