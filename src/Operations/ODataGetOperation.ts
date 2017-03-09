@@ -1,6 +1,6 @@
 import { ODataOperation } from "./ODataOperation";
 
-export class ODataGetOperation<T> extends ODataOperation<T> {
+export class ODataGetOperation<EntityType, PrimaryKeyType> extends ODataOperation<EntityType> {
 
     public BuildQueryUrl(): string {
         let url = "?";
@@ -9,7 +9,7 @@ export class ODataGetOperation<T> extends ODataOperation<T> {
         return url;
     }
 
-    constructor(private idSegment: string) {
+    constructor(private primaryKey: PrimaryKeyType) {
         super();
     }
 

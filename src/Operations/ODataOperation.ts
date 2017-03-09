@@ -1,4 +1,4 @@
-export abstract class ODataOperation<T> {
+export abstract class ODataOperation<EntityType> {
     protected _expand: string;
     protected _select: string;
 
@@ -6,7 +6,7 @@ export abstract class ODataOperation<T> {
      * Sets the OData $expand= property
      * @param ...expand The field name(s) to be expanded
      */
-    public Expand<K extends keyof T>(...expand: K[]) {
+    public Expand<K extends keyof EntityType>(...expand: K[]) {
         this._expand = this.parseStringOrStringArray(...expand);
         return this;
     }
@@ -15,7 +15,7 @@ export abstract class ODataOperation<T> {
      * Sets the OData $select= property
      * @param ...select The field name(s) to be included in the OData Select
      */
-    public Select<K extends keyof T>(...select: K[]) {
+    public Select<K extends keyof EntityType>(...select: K[]) {
         this._select = this.parseStringOrStringArray(...select);
         return this;
     }

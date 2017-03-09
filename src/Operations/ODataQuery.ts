@@ -1,7 +1,7 @@
 import { ODataFilterBuilder, ODataFilterExpression } from "./ODataFilterBuilder";
 import { ODataOperation } from "./ODataOperation";
 
-export class ODataQuery<T> extends ODataOperation<T> {
+export class ODataQuery<EntityType> extends ODataOperation<EntityType> {
     private _filter: string;
     private _top: number;
     private _skip: number;
@@ -27,7 +27,7 @@ export class ODataQuery<T> extends ODataOperation<T> {
      * @param filter The plain text value for the odata $filter. Overrides the FilterBuilder
      * @returns the ODataQuery instance (Fluent)
      */
-    public Filter(filter: string): ODataQuery<T> {
+    public Filter(filter: string): ODataQuery<EntityType> {
         this._filter = filter;
         return this;
     };
@@ -38,8 +38,8 @@ export class ODataQuery<T> extends ODataOperation<T> {
      * @param build The builder expression
      * @returns The ODataQuery instance (Fluent)
      */
-    public BuildFilter(build: (b: ODataFilterExpression<T>) => void): ODataQuery<T> {
-        let builder = ODataFilterBuilder.Create<T>();
+    public BuildFilter(build: (b: ODataFilterExpression<EntityType>) => void): ODataQuery<EntityType> {
+        let builder = ODataFilterBuilder.Create<EntityType>();
         build(builder);
         this._filter = builder.filterBuilderRef.toString();
         return this;
@@ -50,7 +50,7 @@ export class ODataQuery<T> extends ODataOperation<T> {
      * @param top The value to be returned by the query
      * @returns The ODataQuery instance (Fluent)
      */
-    public Top(top: number): ODataQuery<T> {
+    public Top(top: number): ODataQuery<EntityType> {
         this._top = top;
         return this;
     };
@@ -60,7 +60,7 @@ export class ODataQuery<T> extends ODataOperation<T> {
      * @param skip The value to be skipped by the query
      * @returns The ODataQuery instance (Fluent)
      */
-    public Skip(skip: number): ODataQuery<T> {
+    public Skip(skip: number): ODataQuery<EntityType> {
         this._skip = skip;
         return this;
     }
@@ -70,7 +70,7 @@ export class ODataQuery<T> extends ODataOperation<T> {
      * @param orderBy The field name(s) in string
      * @returns The ODataQuery instance (Fluent)
      */
-    public OrderBy<K extends keyof T>(...orderBy: K[]): ODataQuery<T> {
+    public OrderBy<K extends keyof EntityType>(...orderBy: K[]): ODataQuery<EntityType> {
         this._orderBy = this.parseStringOrStringArray(...orderBy);
         return this;
     }
