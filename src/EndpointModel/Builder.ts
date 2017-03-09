@@ -1,4 +1,4 @@
-import { TEntityType, TEntitySet, TEntityKeyElement, TProperty, SchemaType, TFunction } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
+import { TEntityType, TEntitySet, TEntityKeyElement, TProperty, SchemaType } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
 import { PrimaryKeys, Properties } from "../ModelDecorators";
 import { DecoratorDescriptorStore } from "../ModelDecorators/DecoratorDescriptorStore";
 
@@ -10,13 +10,11 @@ export class Builder {
     private EntityTypes: TEntityType[] = [];
     private EntitySets: TEntitySet[] = [];
 
-    private Functions: TFunction[] = [];
-
     /**
      * The Builder class provides you an API to create OData ShcemaTypes
      * @param NameSpaceRoot The root of the public Express route where the Builder will be accessible
      */
-    constructor(public NameSpaceRoot:string) { }
+    constructor(public NameSpaceRoot: string) { }
 
     /**
      * Gets the SchemaType based on the provided EntityTypes, EntitySets, etc...
@@ -59,9 +57,9 @@ export class Builder {
 
         let odataProperties = Properties.GetFor(entityTypeClass);
         let tProperties = odataProperties.map(prop => <TProperty>{
-                Name: prop.PropertyName,
-                Type: prop.EdmType.toString()
-            });
+            Name: prop.PropertyName,
+            Type: prop.EdmType.toString()
+        });
 
         entityType.Property = tProperties;
 
@@ -100,27 +98,5 @@ export class Builder {
         };
         this.EntitySets.push(newEntitySet);
         return newEntitySet;
-    }
-
-    public Function<T>( functionMethod: (...ARGS) => T ):TFunction {
-
-
-        // let bindingParameterName = DecoratorDescriptorStore.GetName(bindingParameter);
-
-        // let tA = {
-        //     Name: name,
-        //     IsBound: isBound,
-        //     Parameter:[
-        //         {Name: "bindingParameter", Type: bindingParameterName}
-        //     ],
-        //     ReturnType: {
-        //         Type: returnType.name
-        //     }
-
-        // } as TAction;
-
-        // this.Actions.push(tA);
-
-        return null;
     }
 }

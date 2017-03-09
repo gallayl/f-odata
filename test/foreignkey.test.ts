@@ -5,7 +5,6 @@ import * as chai from "chai";
 class WithoutForeignKey {
     @PrimaryKey
     id: number;
-    
     a: number;
     b: number;
 }
@@ -15,21 +14,21 @@ class WithForeignKey {
     id: number;
 
     ref_id: number;
-    @ForeignKey("ref_id")
+    @ForeignKey(WithForeignKey, "ref_id")
     reference: WithForeignKey;
 }
 
 @suite("Foreign key decorator tests")
 export class ForeignKeyTests {
-    
+
     @test("Without defined keys should return empty array")
-    WithoutKeyShouldReturnempty(){
+    WithoutKeyShouldReturnempty() {
         let result = ForeignKeys.GetFor(WithoutForeignKey);
         chai.expect(result.length).equals(0);
     }
 
     @test("With defined keys should return a key descriptor")
-    WithKeyShouldReturnKeyDescriptor(){
+    WithKeyShouldReturnKeyDescriptor() {
         let result = ForeignKeys.GetFor(WithForeignKey);
         chai.expect(result.length).equals(1);
     }
