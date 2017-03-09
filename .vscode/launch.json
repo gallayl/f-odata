@@ -7,6 +7,27 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Debug tests",
+            "runtimeExecutable": "mocha",
+            "windows": {
+                "runtimeExecutable": "mocha.cmd"
+            },
+            "preLaunchTask": "build:tests",
+            "runtimeArgs": [
+                "--debug-brk",
+                "-p",
+                "tsconfig.test.json",
+                "test-js/test/index.js"
+            ],
+            "program": "${workspaceRoot}\\test\\index.ts",
+            "outFiles": [
+                "${workspaceRoot}\\test-js\\**\\*.js"
+            ],
+            "port": 5858
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "preLaunchTask": "build",
             "name": "Debug Mock",
             "program": "${workspaceRoot}\\src\\mock.ts",
@@ -14,14 +35,6 @@
             "outFiles": [
                 "${workspaceRoot}\\dist\\**\\*.js"
             ]
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach to Process",
-            "address": "localhost",
-            "port": 5858,
-            "outFiles": []
         }
     ]
 }
