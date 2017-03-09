@@ -1,31 +1,46 @@
 import { EntityStore } from "../Abstracts/EntityStore";
 import { ODataGetOperation, ODataQuery } from "../Operations";
+import { PrimaryKeys } from "../ModelDecorators";
 
-export class InMemoryStore<EntityType, PrimaryKeyType> extends EntityStore<EntityType, PrimaryKeyType> {
+export class InMemoryStore<EntityType, PrimaryKeyType, Fields> extends EntityStore<EntityType, PrimaryKeyType> {
 
     private Entities: EntityType[] = [];
 
-    public async GetSingleAsync(primaryKey: PrimaryKeyType,
-        get: (op: ODataGetOperation<EntityType, PrimaryKeyType>) => ODataGetOperation<EntityType, PrimaryKeyType> | ODataGetOperation<EntityType, PrimaryKeyType> | undefined): Promise<EntityType> {
-        return this.Entities.find(a => a[this.PrimaryKeyName] === primaryKey)
+    public async GetSingleAsync<K extends keyof EntityType>(get: ODataGetOperation<EntityType, PrimaryKeyType, K> | PrimaryKeyType): Promise<EntityType> {
+        let key = get;
+        if (get["PrimaryKey"]){
+            return 
+        }
+        return this.Entities.find(a=><PrimaryKeyType>a[this.PrimaryKeyName] === key);
     }
-    public GetCollectionAsync(query: (op: ODataQuery<EntityType>) => ODataQuery<EntityType> | undefined): Promise<EntityType[]> {
-        throw new Error("Method not implemented.");
+    public async GetCollectionAsync(q: ODataQuery<EntityType, Fields>): Promise<EntityType[]> {
+        return this.Entities;
     }
-    public PostAsync(entity: EntityType): Promise<EntityType> {
-        throw new Error("Method not implemented.");
+    public async PostAsync(entity: EntityType): Promise<EntityType> {
+        this.Entities.push(entity);
+        return entity;
     }
-    public PatchAsync(primaryKey: any, delta: Partial<EntityType>): Promise<EntityType> {
-        throw new Error("Method not implemented.");
+    public async PatchAsync(primaryKey: PrimaryKeyType, delta: Partial<EntityType>): Promise<EntityType> {
+        let e = await this.GetSingleAsync(primaryKey);
+        Object.keys(delta).forEach((val, name)=>{
+            e[name] = val;
+        });
+        return e;
     }
-    public PutAsync(primaryKey: any, entity: EntityType): Promise<EntityType> {
-        throw new Error("Method not implemented.");
+    public async PutAsync(primaryKey: PrimaryKeyType, entity: EntityType): Promise<EntityType> {
+        let e = await this.GetSingleAsync(primaryKey);
+        e = entity;
+        return e;
     }
-    public Delete(primaryKey: any): Promise<any> {
-        throw new Error("Method not implemented.");
+    public async Delete(primaryKey: PrimaryKeyType): Promise<any> {
+        let e = await this.GetSingleAsync(primaryKey);
+        let index = this.Entities.indexOf(e);
+        this.Entities.splice(index,1);
+        return true;
     }
+
+    public static CreateWithId<EntityType, K extends keyof EntityType>(entityRef:{new():EntityType}){
+        return new InMemoryStore<EntityType, number, K>(entityRef);
+    }
+ 
 }
-
-export class InMemoryStoreId<EntityType> extends InMemoryStore<EntityType, number>{ }
-
-export class InMemoryStoreGuid<EntityType> extends InMemoryStore<EntityType, string>{ }

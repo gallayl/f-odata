@@ -2,7 +2,7 @@ import Endpoint from "./endpoint";
 import * as Express from "express";
 import { Builder } from "./EndpointModel";
 import { PrimaryKey, Property, ForeignKey } from "./ModelDecorators";
-import { InMemoryStoreId } from "./EntityStores";
+import { InMemoryStore } from "./EntityStores";
 let app = Express();
 
 let builder = new Builder("Api");
@@ -36,8 +36,10 @@ let endpoint = new Endpoint(app, builder);
 
 endpoint.GetApiRootBody.toString();
 
-let almaStore = new InMemoryStoreId(Alma);
+let almaStore = InMemoryStore.CreateWithId(Alma);
 
-almaStore.GetSingleAsync(1, get=>get.Expand("id"));
+almaStore.GetSingleAsync({
+    PrimaryKey: 1
+});
 
 app.listen(1111);
