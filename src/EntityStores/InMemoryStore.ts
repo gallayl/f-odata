@@ -1,17 +1,12 @@
 import { EntityStore } from "../Abstracts/EntityStore";
 import { ODataGetOperation, ODataQuery } from "../Operations";
-import { PrimaryKeys } from "../ModelDecorators";
 
 export class InMemoryStore<EntityType, PrimaryKeyType, Fields> extends EntityStore<EntityType, PrimaryKeyType> {
 
     private Entities: EntityType[] = [];
 
-    public async GetSingleAsync(getOperation: ODataGetOperation<EntityType, PrimaryKeyType, Fields> | PrimaryKeyType): Promise<EntityType> {
-        let key = getOperation;
-        if (getOperation["PrimaryKey"]){
-            return 
-        }
-        return this.Entities.find(a=><PrimaryKeyType>a[this.PrimaryKeyName] === key);
+    public async GetSingleAsync(getOperation: ODataGetOperation<EntityType, PrimaryKeyType, Fields>): Promise<EntityType> {
+        return this.Entities.find(a=><PrimaryKeyType>a[this.PrimaryKeyName] === getOperation.PrimaryKey);
     }
     public async GetCollectionAsync(q: ODataQuery<EntityType, Fields>): Promise<EntityType[]> {
         return this.Entities;
@@ -21,19 +16,19 @@ export class InMemoryStore<EntityType, PrimaryKeyType, Fields> extends EntitySto
         return entity;
     }
     public async PatchAsync(primaryKey: PrimaryKeyType, delta: Partial<EntityType>): Promise<EntityType> {
-        let e = await this.GetSingleAsync(primaryKey);
+        let e = await this.GetSingleAsync({PrimaryKey: primaryKey});
         Object.keys(delta).forEach((val, name)=>{
             e[name] = val;
         });
         return e;
     }
     public async PutAsync(primaryKey: PrimaryKeyType, entity: EntityType): Promise<EntityType> {
-        let e = await this.GetSingleAsync(primaryKey);
+        let e = await this.GetSingleAsync({PrimaryKey: primaryKey});
         e = entity;
         return e;
     }
     public async Delete(primaryKey: PrimaryKeyType): Promise<any> {
-        let e = await this.GetSingleAsync(primaryKey);
+        let e = await this.GetSingleAsync({PrimaryKey: primaryKey});
         let index = this.Entities.indexOf(e);
         this.Entities.splice(index,1);
         return true;
