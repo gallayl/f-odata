@@ -12,7 +12,7 @@ class TestClass {
     @PrimaryKey
     Id: number;
     Name: string;
-    OtherValue: string;
+    OtherValue?: string;
 
     ChildId?: number;
     @ForeignKey(TestChild, "ChildId")
@@ -52,6 +52,17 @@ export class InMemoryStoreTests{
         let reloaded = await this.store.GetSingleAsync({PrimaryKey: postResult.Id});
         chai.expect(reloaded.Name).equals(name);
         chai.expect(reloaded.OtherValue).equals(otherVal);
+    }
+
+    @test("Test POST and assert GetCollection length")
+    async PostGetCollection(){
+        let n1 = TestHelpers.RandomString(3);
+        let n2 = TestHelpers.RandomString(3);
+
+        await this.store.PostAsync({Id:1, Name: n1});
+        await this.store.PostAsync({Id:2, Name: n2});
+
+        let result = await this.store.GetCollectionAsync();
     }
 
 }

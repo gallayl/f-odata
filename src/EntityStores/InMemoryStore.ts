@@ -8,7 +8,7 @@ export class InMemoryStore<EntityType, PrimaryKeyType, Fields> extends EntitySto
     public async GetSingleAsync(getOperation: ODataGetOperation<EntityType, PrimaryKeyType, Fields>): Promise<EntityType> {
         return this.Entities.find(a=><PrimaryKeyType>a[this.PrimaryKeyName] === getOperation.PrimaryKey);
     }
-    public async GetCollectionAsync(q: ODataQuery<EntityType, Fields>): Promise<EntityType[]> {
+    public async GetCollectionAsync(q?: ODataQuery<EntityType, Fields>): Promise<EntityType[]> {
         return this.Entities;
     }
     public async PostAsync(entity: EntityType): Promise<EntityType> {

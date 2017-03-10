@@ -17,7 +17,7 @@ export abstract class EntityStore<EntityType, PrimaryKeyType>{
         get: ODataGetOperation<EntityType, PrimaryKeyType, K>):
         Promise<EntityType>;
     public abstract async GetCollectionAsync<K extends keyof EntityType>(
-        query: ODataQuery<EntityType, K> | undefined):
+        query?: ODataQuery<EntityType, K>):
         Promise<EntityType[]>;
     public abstract async PostAsync(entity: EntityType): Promise<EntityType>;
     public abstract async PatchAsync(primaryKey: PrimaryKeyType, delta: Partial<EntityType>): Promise<EntityType>;
