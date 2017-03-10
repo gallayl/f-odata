@@ -29,13 +29,8 @@ export class Properties {
      * @param entityTypeClass The model class to check
      */
     public static HasFor<T>(entityTypeClass: { new (): T }): boolean {
-        try{
-            let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-            return (found && found.Entries && found.Entries.length > 0) ? true : false;
-        } catch (e) {
-            return false;
-        }
-
+        let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+        return (found && found.Entries && found.Entries.length > 0) ? true : false;
     }
 }
 
