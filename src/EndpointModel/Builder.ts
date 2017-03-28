@@ -1,4 +1,4 @@
-import { TEntityType, TEntitySet, TEntityKeyElement, TProperty, SchemaType } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
+import { SchemaType, TEntityKeyElement, TEntitySet, TEntityType, TProperty } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
 import { PrimaryKeys, Properties } from "../ModelDecorators";
 import { DecoratorDescriptorStore } from "../ModelDecorators/DecoratorDescriptorStore";
 
@@ -35,15 +35,15 @@ export class Builder {
      */
     public EntityType<T>(entityTypeClass: { new (): T }): TEntityType {
 
-        let entityTypeName = DecoratorDescriptorStore.GetName(entityTypeClass);
+        const entityTypeName = DecoratorDescriptorStore.GetName(entityTypeClass);
 
-        let existing = this.EntityTypes.find(t => t.Name === entityTypeName);
+        const existing = this.EntityTypes.find((t) => t.Name === entityTypeName);
         if (existing) {
             return existing;
         }
-        let keyfield = PrimaryKeys.GetFor(entityTypeClass);
+        const keyfield = PrimaryKeys.GetFor(entityTypeClass);
 
-        let entityType = {
+        const entityType = {
             Name: entityTypeName,
             Property: [],
             NavigationProperty: []
@@ -55,8 +55,8 @@ export class Builder {
             ]
         }] as TEntityKeyElement[];
 
-        let odataProperties = Properties.GetFor(entityTypeClass);
-        let tProperties = odataProperties.map(prop => <TProperty>{
+        const odataProperties = Properties.GetFor(entityTypeClass);
+        const tProperties = odataProperties.map((prop) => <TProperty>{
             Name: prop.PropertyName,
             Type: prop.EdmType.toString()
         });
@@ -75,9 +75,9 @@ export class Builder {
      */
     public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName: string): TEntitySet {
 
-        let existing = this.EntitySets.find(s => s.Name === entitySetName);
+        const existing = this.EntitySets.find((s) => s.Name === entitySetName);
 
-        let entityTypeName = DecoratorDescriptorStore.GetName(entityTypeClass);
+        const entityTypeName = DecoratorDescriptorStore.GetName(entityTypeClass);
 
         if (existing) {
             if (existing.EntityType !== entityTypeName) {
@@ -87,12 +87,12 @@ export class Builder {
             return existing;
         }
 
-        let entityType = this.EntityTypes.find(e => e.Name === entityTypeName);
+        const entityType = this.EntityTypes.find((e) => e.Name === entityTypeName);
         if (!entityType) {
             throw new Error(`Entity type not yet added for type '${entityTypeName}', please add it first.`);
         }
 
-        let newEntitySet = <TEntitySet>{
+        const newEntitySet = <TEntitySet>{
             Name: entitySetName,
             EntityType: entityTypeName,
         };

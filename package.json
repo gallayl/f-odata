@@ -10,6 +10,7 @@
     "posttest": "nyc report --reporter=json && codecov -f coverage/*.json",
     "test:watch": "mocha-typescript-watch -p tsconfig.test.json ./test-js/test/index.js",
     "mock": "tsc && node dist/mock.js",
+    "tslint": "tslint src/index.ts",
     "cxsd": "cxsd http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/schemas/edm.xsd"
   },
   "nyc": {},
@@ -26,6 +27,7 @@
   "author": "Gallay Lajos",
   "license": "MIT",
   "dependencies": {
+    "codacy-coverage": "^2.0.1",
     "express": "^4.15.0"
   },
   "devDependencies": {
@@ -38,8 +40,8 @@
     "cxsd": "^0.1.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.2.0",
-    "mocha-typescript": "^1.0.22",
-    "nyc": "^10.1.2",
-    "typescript": "^2.2.1"
+    "mocha-typescript": "^1.0.23",
+    "nyc": "^10.2.0",
+    "typescript": "^2.2.2"
   }
 }

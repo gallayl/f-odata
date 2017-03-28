@@ -1,4 +1,4 @@
-var cxml = require("cxml");
+var cxml = require('cxml');
 
 cxml.register('xml-primitives', exports, [
 ], [

@@ -98,7 +98,7 @@ interface _SchemaType extends BaseType {
 }
 interface SchemaType extends _SchemaType { constructor: { new(): SchemaType }; }
 
-export type TAbstractType = ("Edm.ComplexType" | "Edm.EntityType" | "Edm.PrimitiveType" | "Edm.Geography" | "Edm.Geometry" | "Edm.AnnotationPath" | "Edm.NavigationPropertyPath" | "Edm.PropertyPath" | "Collection(Edm.ComplexType)" | "Collection(Edm.EntityType)" | "Collection(Edm.PrimitiveType)" | "Collection(Edm.Geography)" | "Collection(Edm.Geometry)" | "Collection(Edm.AnnotationPath)" | "Collection(Edm.NavigationPropertyPath)" | "Collection(Edm.PropertyPath)");
+export type TAbstractType = ('Edm.ComplexType' | 'Edm.EntityType' | 'Edm.PrimitiveType' | 'Edm.Geography' | 'Edm.Geometry' | 'Edm.AnnotationPath' | 'Edm.NavigationPropertyPath' | 'Edm.PropertyPath' | 'Collection(Edm.ComplexType)' | 'Collection(Edm.EntityType)' | 'Collection(Edm.PrimitiveType)' | 'Collection(Edm.Geography)' | 'Collection(Edm.Geometry)' | 'Collection(Edm.AnnotationPath)' | 'Collection(Edm.NavigationPropertyPath)' | 'Collection(Edm.PropertyPath)');
 interface _TAbstractType extends Primitive._string { content: TAbstractType; }
 
 interface _TAction extends BaseType {
@@ -520,7 +520,7 @@ export var TLabeledElementExpression: { new(): TLabeledElementExpression };
 export type TLabeledElementReferenceExpression = string;
 type _TLabeledElementReferenceExpression = _TQualifiedName;
 
-export type TMax = "max";
+export type TMax = 'max';
 interface _TMax extends Primitive._string { content: TMax; }
 
 export type TMaxLengthFacet = string;
@@ -562,7 +562,7 @@ interface _TOnDelete extends BaseType {
 export interface TOnDelete extends _TOnDelete { constructor: { new(): TOnDelete }; }
 export var TOnDelete: { new(): TOnDelete };
 
-export type TOnDeleteAction = ("Cascade" | "None" | "SetDefault" | "SetNull");
+export type TOnDeleteAction = ('Cascade' | 'None' | 'SetDefault' | 'SetNull');
 interface _TOnDeleteAction extends Primitive._string { content: TOnDeleteAction; }
 
 interface _TOneChildExpression extends BaseType {
@@ -821,10 +821,10 @@ type _TTypeName = Primitive._string;
 export type TUnicodeFacet = boolean;
 type _TUnicodeFacet = Primitive._boolean;
 
-export type TVariable = "variable";
+export type TVariable = 'variable';
 interface _TVariable extends Primitive._string { content: TVariable; }
 
-type Type = ("Action" | "ActionImport" | "Annotation" | "Apply" | "Cast" | "ComplexType" | "EntityContainer" | "EntitySet" | "EntityType" | "EnumType" | "Function" | "FunctionImport" | "If" | "IsOf" | "LabeledElement" | "Member" | "NavigationProperty" | "Null" | "OnDelete" | "Parameter" | "Property" | "PropertyValue" | "Record" | "Reference" | "ReferentialConstraint" | "ReturnType" | "Schema" | "Singleton" | "Term" | "TypeDefinition" | "UrlRef");
+type Type = ('Action' | 'ActionImport' | 'Annotation' | 'Apply' | 'Cast' | 'ComplexType' | 'EntityContainer' | 'EntitySet' | 'EntityType' | 'EnumType' | 'Function' | 'FunctionImport' | 'If' | 'IsOf' | 'LabeledElement' | 'Member' | 'NavigationProperty' | 'Null' | 'OnDelete' | 'Parameter' | 'Property' | 'PropertyValue' | 'Record' | 'Reference' | 'ReferentialConstraint' | 'ReturnType' | 'Schema' | 'Singleton' | 'Term' | 'TypeDefinition' | 'UrlRef');
 interface _Type extends Primitive._string { content: Type; }
 
 export interface document extends BaseType {

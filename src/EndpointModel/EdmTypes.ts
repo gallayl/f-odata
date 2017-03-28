@@ -8,7 +8,7 @@ export enum EdmType {
      *  Not set
      */
     Unknown,
-    
+
     /** Binary data */
     Binary,
 
@@ -27,7 +27,7 @@ export enum EdmType {
 
     /** Numeric values with fixed precision and scale */
     Decimal,
-    
+
     /** IEEE 754 binary64 floating-point number (15-17 decimal digits) */
     Double,
 
@@ -39,7 +39,7 @@ export enum EdmType {
 
     /** Signed 16-bit integer */
     Int16,
-    
+
     /** Signed 32-bit integer */
     Int32,
 
@@ -48,7 +48,7 @@ export enum EdmType {
 
     /** Signed 8-bit integer */
     SByte,
-    
+
     /** IEEE 754 binary32 floating-point number (6-9 decimal digits) */
     Single,
 

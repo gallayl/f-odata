@@ -14,8 +14,8 @@ function isForeignKeyDescriptorEntry(descriptor: any): descriptor is ForeignKeyD
 export class ForeignKeys {
 
     public static GetFor<T>(entityTypeClass: { new (): T }): ForeignKeyDescriptorEntry[] {
-        let descriptor = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-        return <ForeignKeyDescriptorEntry[]>descriptor.Entries.filter(a => isForeignKeyDescriptorEntry(a));
+        const descriptor = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+        return <ForeignKeyDescriptorEntry[]>descriptor.Entries.filter((a) => isForeignKeyDescriptorEntry(a));
     }
 }
 

@@ -1,8 +1,8 @@
-import { suite, test } from "mocha-typescript";
-import { Builder } from "../src/EndpointModel";
-import * as Express from "express";
-import Endpoint from "../src/endpoint";
 import * as chai from "chai";
+import * as Express from "express";
+import { suite, test } from "mocha-typescript";
+import Endpoint from "../src/endpoint";
+import { Builder } from "../src/EndpointModel";
 import chaiHttp = require("chai-http");
 
 
@@ -38,29 +38,29 @@ export class EndpointTests {
     @test
     "CheckApiRootAvailable"(done: () => void) {
 
-        let body = this.Endpoint.GetApiRootBody();
+        const body = this.Endpoint.GetApiRootBody();
 
         chai.request(EndpointTests.ExpressApp)
             .get("/" + this.Route + "/")
-            .then(res => {
+            .then((res) => {
                 chai.expect(res.body.message).to.eql(body);
                 done();
             })
-            .catch(err => {
+            .catch((err) => {
                 done();
             });
     }
 
     @test
     "CheckMetadataAvailable"(done: () => void) {
-        let body = this.Endpoint.GetMetadataBody();
+        const body = this.Endpoint.GetMetadataBody();
         chai.request(EndpointTests.ExpressApp)
             .get("/" + this.Route + "/$metadata")
-            .then(res => {
+            .then((res) => {
                 chai.expect(res.body.message).to.eql(body);
                 done();
             })
-            .catch(err => {
+            .catch((err) => {
                 done();
             });
     }

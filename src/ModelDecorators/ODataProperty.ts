@@ -17,8 +17,8 @@ export class Properties {
      */
     public static GetFor<T>(entityTypeClass: { new (): T }): ODataPropertyDesrciptorEntry[] {
         try{
-            let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-            return found.Entries.filter(a => isODataPropertyDesrciptorEntry(a)).map(a => <ODataPropertyDesrciptorEntry>a);
+            const found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+            return found.Entries.filter((a) => isODataPropertyDesrciptorEntry(a)).map((a) => <ODataPropertyDesrciptorEntry>a);
         } catch (e){
             return [];
         }
@@ -29,7 +29,7 @@ export class Properties {
      * @param entityTypeClass The model class to check
      */
     public static HasFor<T>(entityTypeClass: { new (): T }): boolean {
-        let found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+        const found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
         return (found && found.Entries && found.Entries.length > 0) ? true : false;
     }
 }

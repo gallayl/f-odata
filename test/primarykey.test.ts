@@ -1,6 +1,6 @@
+import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 import { PrimaryKey, PrimaryKeys } from "../src/ModelDecorators/PrimaryKey";
-import * as chai from "chai";
 
 export class WithoutKey {
     MyProperty: string;
@@ -24,7 +24,7 @@ export class PrimaryKeyTest {
 
     @test("WithKeyShouldSucceed")
     WithKeyShouldGetRegisteredKey() {
-        let key = PrimaryKeys.GetFor(HasKey);
+        const key = PrimaryKeys.GetFor(HasKey);
         chai.expect(key).equals("id");
     }
 

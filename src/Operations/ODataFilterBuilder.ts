@@ -7,7 +7,7 @@ export class ODataFilterExpression<T>{
     private value: string = "";
 
     private getFilterValueSegment(value: any): string {
-        let castedValue = value.toString();
+        const castedValue = value.toString();
         if (typeof value === "string" && !/^[0-9]*$/.test(castedValue)) {
             return `('${castedValue}')`;
         }
@@ -107,7 +107,7 @@ export class ODataFilterExpression<T>{
      * @returns The next ODataFilterConnection (Fluent)
      */
     public Not<K extends keyof T>(build: (b: ODataFilterExpression<T>) => void) {
-        let builder = ODataFilterBuilder.Create<T>();
+        const builder = ODataFilterBuilder.Create<T>();
         build(ODataFilterBuilder.Create<T>());
         this.value = `not (${builder.toString()})`;
         return this.Finialize();
@@ -119,7 +119,7 @@ export class ODataFilterExpression<T>{
      * @returns The next ODataFilterConnection (Fluent)
      */
     public BuildFilter(build: (b: ODataFilterExpression<T>) => void) {
-        let builder = ODataFilterBuilder.Create<T>();
+        const builder = ODataFilterBuilder.Create<T>();
         build(ODataFilterBuilder.Create<T>());
         this.value = `(${builder.toString()})`;
         return this.Finialize();
@@ -175,8 +175,8 @@ export class ODataFilterBuilder<T>{
      * @returns The first ODataFilterExpression value for the ODataFilterBuilder
      */
     public static Create<T>(): ODataFilterExpression<T> {
-        let builder = new ODataFilterBuilder();
-        let firstSegment = new ODataFilterExpression(builder);
+        const builder = new ODataFilterBuilder();
+        const firstSegment = new ODataFilterExpression(builder);
         return firstSegment;
     }
 
@@ -186,6 +186,6 @@ export class ODataFilterBuilder<T>{
      * @returns The Filter query expression
      */
     public toString(): string {
-        return this.filterSegments.map(s => s.toString()).join(' ');
+        return this.filterSegments.map((s) => s.toString()).join(' ');
     }
 }

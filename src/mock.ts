@@ -3,9 +3,9 @@ import * as Express from "express";
 import { Builder } from "./EndpointModel";
 import { PrimaryKey, Property, ForeignKey } from "./ModelDecorators";
 import { InMemoryStore } from "./EntityStores";
-let app = Express();
+const app = Express();
 
-let builder = new Builder("Api");
+const builder = new Builder("Api");
 
 class OtherClass {
     @PrimaryKey
@@ -32,11 +32,11 @@ builder.EntityType(Alma);
 builder.EntitySet(OtherClass, "others");
 builder.EntitySet(Alma, "almák");
 
-let endpoint = new Endpoint(app, builder);
+const endpoint = new Endpoint(app, builder);
 
 endpoint.GetApiRootBody.toString();
 
-let almaStore = InMemoryStore.CreateWithId(Alma);
+const almaStore = InMemoryStore.CreateWithId(Alma);
 
 almaStore.GetSingleAsync({
     PrimaryKey: 1

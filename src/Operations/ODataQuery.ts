@@ -15,7 +15,7 @@ export class ODataQuery<EntityType, FieldType> extends ODataOperation<EntityType
      * @returns The ODataQuery instance (Fluent)
      */
     public BuildFilter(build: (b: ODataFilterExpression<EntityType>) => void): ODataQuery<EntityType, FieldType> {
-        let builder = ODataFilterBuilder.Create<EntityType>();
+        const builder = ODataFilterBuilder.Create<EntityType>();
         build(builder);
         this.Filter = builder.filterBuilderRef.toString();
         return this;

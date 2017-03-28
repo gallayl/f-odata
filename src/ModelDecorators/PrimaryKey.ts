@@ -18,11 +18,11 @@ export class PrimaryKeys {
      */
     public static GetFor<T>(entityTypeClass: { new (): T }): string {
 
-        let descriptor = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
+        const descriptor = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
         if (!descriptor) {
             throw new Error(`Descriptor not registered for '${entityTypeClass.name}'`);
         }
-        let entry = <PrimaryKeyDescriptorEntry>descriptor.Entries.find(a => isPrimaryKeyDescriptorEntry(a));
+        const entry = <PrimaryKeyDescriptorEntry>descriptor.Entries.find((a) => isPrimaryKeyDescriptorEntry(a));
         if (!entry) {
             throw new Error(`No primary key registered for '${entityTypeClass.name}'`);
         }
@@ -39,7 +39,7 @@ export class PrimaryKeys {
 }
 
 /**
- * 
+ *
  * @param target The target obect
  * @param propertyKey The property that should be a primary key
  */

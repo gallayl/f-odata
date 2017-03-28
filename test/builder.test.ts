@@ -1,6 +1,6 @@
+import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 import { Builder } from "../src/EndpointModel";
-import * as chai from "chai";
 import chaiHttp = require("chai-http");
 import { PrimaryKey, Property } from "../src/ModelDecorators";
 
@@ -68,7 +68,7 @@ export class EndpointBuilderTests {
     @test("Register EntityType 'A' and get EntityType 'A' without keyfield")
     RegisterSetA() {
         this.b.EntityType(A);
-        let aType = this.b.EntityType(A);
+        const aType = this.b.EntityType(A);
         chai.expect(aType.Name).equals("A");
         chai.expect(aType.Key[0].PropertyRef[0].Name).equals("Id");
     }
@@ -92,8 +92,8 @@ export class EndpointBuilderTests {
         this.b.EntityType(A);
         this.b.EntitySet(A, "As");
 
-        let type = this.b.EntityType(A);
-        let set = this.b.EntitySet(A, "As");
+        const type = this.b.EntityType(A);
+        const set = this.b.EntitySet(A, "As");
 
         chai.expect(set.Name).equals("As");
         chai.expect(set.EntityType).equals(type.Name);
@@ -108,7 +108,7 @@ export class EndpointBuilderTests {
 
     @test("Register Type 'A','B', set 'As' and register B into As should throw mismatch error")
     RegisterEntitySetDifferentTypeMismatch() {
-        let b = new Builder("api");
+        const b = new Builder("api");
         b.EntityType(A);
         b.EntityType(B);
         b.EntitySet(A, "As");

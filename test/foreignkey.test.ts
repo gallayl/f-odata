@@ -1,6 +1,6 @@
-import { suite, test } from "mocha-typescript";
-import { PrimaryKey, PrimaryKeys, ForeignKey, ForeignKeys } from "../src/ModelDecorators";
 import * as chai from "chai";
+import { suite, test } from "mocha-typescript";
+import { ForeignKey, ForeignKeys, PrimaryKey, PrimaryKeys } from "../src/ModelDecorators";
 
 class WithoutForeignKey {
     @PrimaryKey
@@ -23,13 +23,13 @@ export class ForeignKeyTests {
 
     @test("Without defined keys should return empty array")
     WithoutKeyShouldReturnempty() {
-        let result = ForeignKeys.GetFor(WithoutForeignKey);
+        const result = ForeignKeys.GetFor(WithoutForeignKey);
         chai.expect(result.length).equals(0);
     }
 
     @test("With defined keys should return a key descriptor")
     WithKeyShouldReturnKeyDescriptor() {
-        let result = ForeignKeys.GetFor(WithForeignKey);
+        const result = ForeignKeys.GetFor(WithForeignKey);
         chai.expect(result.length).equals(1);
     }
 

@@ -1,4 +1,4 @@
-var cxml = require("cxml");
+var cxml = require('cxml');
 var Primitive = require('../../../xml-primitives');
 
 cxml.register('http://docs.oasis-open.org/odata/ns/edm', exports, [

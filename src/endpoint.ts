@@ -1,5 +1,5 @@
-import { Builder } from "./EndpointModel";
 import * as Express from "express";
+import { Builder } from "./EndpointModel";
 
 export default class Endpoint {
 

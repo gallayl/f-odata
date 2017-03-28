@@ -16,7 +16,7 @@ export class DecoratorDescriptorStore {
      * @param obj The object to get the DecoratorDescriptor for.
      */
     public static GetDescriptor<T>(obj: { new (): T }): DecoratorDescriptor {
-        return this.descriptorsInternal.filter(k => obj === k.Object || obj.prototype === k.Object)[0];
+        return this.descriptorsInternal.filter((k) => obj === k.Object || obj.prototype === k.Object)[0];
     }
 
     /**
@@ -33,7 +33,7 @@ export class DecoratorDescriptorStore {
      * @param newValue The new Object and Key values
      */
     public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: any) {
-        let found = this.GetDescriptor(entityTypeClass);
+        const found = this.GetDescriptor(entityTypeClass);
         if (!found) {
             this.descriptorsInternal.push({
                 Object: entityTypeClass,
