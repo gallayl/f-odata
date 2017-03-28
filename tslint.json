@@ -1,4 +1,9 @@
 {
+    "jsRules": {
+        "quotemark": [
+            "single"
+        ]
+    },
     "rules": {
         "quotemark": [
             "single"

@@ -65,7 +65,7 @@ interface _AnnotationType extends BaseType {
 	TimeOfDay?: string;
 	UrlRef?: TOneChildExpression;
 }
-interface AnnotationType extends _AnnotationType { constructor: { new(): AnnotationType }; }
+interface AnnotationType extends _AnnotationType { constructor: { new (): AnnotationType }; }
 
 export type binary = string;
 type _binary = Primitive._string;
@@ -96,7 +96,7 @@ interface _SchemaType extends BaseType {
 	Term: TTerm[];
 	TypeDefinition: TTypeDefinition[];
 }
-interface SchemaType extends _SchemaType { constructor: { new(): SchemaType }; }
+interface SchemaType extends _SchemaType { constructor: { new (): SchemaType }; }
 
 export type TAbstractType = ('Edm.ComplexType' | 'Edm.EntityType' | 'Edm.PrimitiveType' | 'Edm.Geography' | 'Edm.Geometry' | 'Edm.AnnotationPath' | 'Edm.NavigationPropertyPath' | 'Edm.PropertyPath' | 'Collection(Edm.ComplexType)' | 'Collection(Edm.EntityType)' | 'Collection(Edm.PrimitiveType)' | 'Collection(Edm.Geography)' | 'Collection(Edm.Geometry)' | 'Collection(Edm.AnnotationPath)' | 'Collection(Edm.NavigationPropertyPath)' | 'Collection(Edm.PropertyPath)');
 interface _TAbstractType extends Primitive._string { content: TAbstractType; }
@@ -109,8 +109,8 @@ interface _TAction extends BaseType {
 	Parameter?: TActionFunctionParameter[];
 	ReturnType?: TActionFunctionReturnType;
 }
-export interface TAction extends _TAction { constructor: { new(): TAction }; }
-export var TAction: { new(): TAction };
+export interface TAction extends _TAction { constructor: { new (): TAction }; }
+export var TAction: { new (): TAction };
 
 interface _TActionFunctionParameter extends BaseType {
 	MaxLength?: string;
@@ -122,8 +122,8 @@ interface _TActionFunctionParameter extends BaseType {
 	Type: string;
 	Annotation?: AnnotationType[];
 }
-export interface TActionFunctionParameter extends _TActionFunctionParameter { constructor: { new(): TActionFunctionParameter }; }
-export var TActionFunctionParameter: { new(): TActionFunctionParameter };
+export interface TActionFunctionParameter extends _TActionFunctionParameter { constructor: { new (): TActionFunctionParameter }; }
+export var TActionFunctionParameter: { new (): TActionFunctionParameter };
 
 interface _TActionFunctionReturnType extends BaseType {
 	MaxLength?: string;
@@ -134,8 +134,8 @@ interface _TActionFunctionReturnType extends BaseType {
 	Type: string;
 	Annotation?: AnnotationType[];
 }
-export interface TActionFunctionReturnType extends _TActionFunctionReturnType { constructor: { new(): TActionFunctionReturnType }; }
-export var TActionFunctionReturnType: { new(): TActionFunctionReturnType };
+export interface TActionFunctionReturnType extends _TActionFunctionReturnType { constructor: { new (): TActionFunctionReturnType }; }
+export var TActionFunctionReturnType: { new (): TActionFunctionReturnType };
 
 interface _TActionImport extends BaseType {
 	Action: string;
@@ -144,16 +144,16 @@ interface _TActionImport extends BaseType {
 	Name: string;
 	Annotation?: AnnotationType[];
 }
-export interface TActionImport extends _TActionImport { constructor: { new(): TActionImport }; }
-export var TActionImport: { new(): TActionImport };
+export interface TActionImport extends _TActionImport { constructor: { new (): TActionImport }; }
+export var TActionImport: { new (): TActionImport };
 
 interface _TAnnotations extends BaseType {
 	Qualifier?: string;
 	Target: string;
 	Annotation: AnnotationType[];
 }
-export interface TAnnotations extends _TAnnotations { constructor: { new(): TAnnotations }; }
-export var TAnnotations: { new(): TAnnotations };
+export interface TAnnotations extends _TAnnotations { constructor: { new (): TAnnotations }; }
+export var TAnnotations: { new (): TAnnotations };
 
 export type TAppliesTo = Type[];
 
@@ -196,8 +196,8 @@ interface _TApplyExpression extends BaseType {
 	TimeOfDay: string[];
 	UrlRef: TOneChildExpression[];
 }
-export interface TApplyExpression extends _TApplyExpression { constructor: { new(): TApplyExpression }; }
-export var TApplyExpression: { new(): TApplyExpression };
+export interface TApplyExpression extends _TApplyExpression { constructor: { new (): TApplyExpression }; }
+export var TApplyExpression: { new (): TApplyExpression };
 
 export type TBinaryConstantExpression = string;
 type _TBinaryConstantExpression = _binary;
@@ -248,8 +248,8 @@ interface _TCastOrIsOfExpression extends BaseType {
 	TimeOfDay: string;
 	UrlRef: TOneChildExpression;
 }
-export interface TCastOrIsOfExpression extends _TCastOrIsOfExpression { constructor: { new(): TCastOrIsOfExpression }; }
-export var TCastOrIsOfExpression: { new(): TCastOrIsOfExpression };
+export interface TCastOrIsOfExpression extends _TCastOrIsOfExpression { constructor: { new (): TCastOrIsOfExpression }; }
+export var TCastOrIsOfExpression: { new (): TCastOrIsOfExpression };
 
 export type TClientFunction = string;
 type _TClientFunction = Primitive._string;
@@ -291,8 +291,8 @@ interface _TCollectionExpression extends BaseType {
 	TimeOfDay?: string[];
 	UrlRef?: TOneChildExpression[];
 }
-export interface TCollectionExpression extends _TCollectionExpression { constructor: { new(): TCollectionExpression }; }
-export var TCollectionExpression: { new(): TCollectionExpression };
+export interface TCollectionExpression extends _TCollectionExpression { constructor: { new (): TCollectionExpression }; }
+export var TCollectionExpression: { new (): TCollectionExpression };
 
 interface _TComplexType extends BaseType {
 	Abstract?: boolean;
@@ -303,8 +303,8 @@ interface _TComplexType extends BaseType {
 	NavigationProperty?: TNavigationProperty[];
 	Property?: TProperty[];
 }
-export interface TComplexType extends _TComplexType { constructor: { new(): TComplexType }; }
-export var TComplexType: { new(): TComplexType };
+export interface TComplexType extends _TComplexType { constructor: { new (): TComplexType }; }
+export var TComplexType: { new (): TComplexType };
 
 export type TDateConstantExpression = Date;
 type _TDateConstantExpression = _date;
@@ -327,14 +327,14 @@ interface _TEntityContainer extends BaseType {
 	FunctionImport: TFunctionImport[];
 	Singleton: TSingleton[];
 }
-export interface TEntityContainer extends _TEntityContainer { constructor: { new(): TEntityContainer }; }
-export var TEntityContainer: { new(): TEntityContainer };
+export interface TEntityContainer extends _TEntityContainer { constructor: { new (): TEntityContainer }; }
+export var TEntityContainer: { new (): TEntityContainer };
 
 interface _TEntityKeyElement extends BaseType {
 	PropertyRef: TPropertyRef[];
 }
-export interface TEntityKeyElement extends _TEntityKeyElement { constructor: { new(): TEntityKeyElement }; }
-export var TEntityKeyElement: { new(): TEntityKeyElement };
+export interface TEntityKeyElement extends _TEntityKeyElement { constructor: { new (): TEntityKeyElement }; }
+export var TEntityKeyElement: { new (): TEntityKeyElement };
 
 interface _TEntitySet extends BaseType {
 	EntityType: string;
@@ -343,8 +343,8 @@ interface _TEntitySet extends BaseType {
 	Annotation?: AnnotationType[];
 	NavigationPropertyBinding?: TNavigationPropertyBinding[];
 }
-export interface TEntitySet extends _TEntitySet { constructor: { new(): TEntitySet }; }
-export var TEntitySet: { new(): TEntitySet };
+export interface TEntitySet extends _TEntitySet { constructor: { new (): TEntitySet }; }
+export var TEntitySet: { new (): TEntitySet };
 
 interface _TEntityType extends BaseType {
 	Abstract?: boolean;
@@ -357,8 +357,8 @@ interface _TEntityType extends BaseType {
 	NavigationProperty?: TNavigationProperty[];
 	Property?: TProperty[];
 }
-export interface TEntityType extends _TEntityType { constructor: { new(): TEntityType }; }
-export var TEntityType: { new(): TEntityType };
+export interface TEntityType extends _TEntityType { constructor: { new (): TEntityType }; }
+export var TEntityType: { new (): TEntityType };
 
 export type TEnumMemberList = string[];
 
@@ -369,16 +369,16 @@ interface _TEnumType extends BaseType {
 	Annotation: AnnotationType[];
 	Member: TEnumTypeMember[];
 }
-export interface TEnumType extends _TEnumType { constructor: { new(): TEnumType }; }
-export var TEnumType: { new(): TEnumType };
+export interface TEnumType extends _TEnumType { constructor: { new (): TEnumType }; }
+export var TEnumType: { new (): TEnumType };
 
 interface _TEnumTypeMember extends BaseType {
 	Name: string;
 	Value?: number;
 	Annotation?: AnnotationType[];
 }
-export interface TEnumTypeMember extends _TEnumTypeMember { constructor: { new(): TEnumTypeMember }; }
-export var TEnumTypeMember: { new(): TEnumTypeMember };
+export interface TEnumTypeMember extends _TEnumTypeMember { constructor: { new (): TEnumTypeMember }; }
+export var TEnumTypeMember: { new (): TEnumTypeMember };
 
 export type TFloatConstantExpression = number;
 type _TFloatConstantExpression = Primitive._number;
@@ -392,8 +392,8 @@ interface _TFunction extends BaseType {
 	Parameter?: TActionFunctionParameter[];
 	ReturnType: TActionFunctionReturnType;
 }
-export interface TFunction extends _TFunction { constructor: { new(): TFunction }; }
-export var TFunction: { new(): TFunction };
+export interface TFunction extends _TFunction { constructor: { new (): TFunction }; }
+export var TFunction: { new (): TFunction };
 
 interface _TFunctionImport extends BaseType {
 	EntitySet?: string;
@@ -402,8 +402,8 @@ interface _TFunctionImport extends BaseType {
 	Name: string;
 	Annotation?: AnnotationType[];
 }
-export interface TFunctionImport extends _TFunctionImport { constructor: { new(): TFunctionImport }; }
-export var TFunctionImport: { new(): TFunctionImport };
+export interface TFunctionImport extends _TFunctionImport { constructor: { new (): TFunctionImport }; }
+export var TFunctionImport: { new (): TFunctionImport };
 
 export type TGuidConstantExpression = string;
 type _TGuidConstantExpression = _TGuidLiteral;
@@ -449,8 +449,8 @@ interface _TIfExpression extends BaseType {
 	TimeOfDay: string[];
 	UrlRef: TOneChildExpression[];
 }
-export interface TIfExpression extends _TIfExpression { constructor: { new(): TIfExpression }; }
-export var TIfExpression: { new(): TIfExpression };
+export interface TIfExpression extends _TIfExpression { constructor: { new (): TIfExpression }; }
+export var TIfExpression: { new (): TIfExpression };
 
 export type time = string;
 type _time = Primitive._string;
@@ -514,8 +514,8 @@ interface _TLabeledElementExpression extends BaseType {
 	TimeOfDay?: string;
 	UrlRef?: TOneChildExpression;
 }
-export interface TLabeledElementExpression extends _TLabeledElementExpression { constructor: { new(): TLabeledElementExpression }; }
-export var TLabeledElementExpression: { new(): TLabeledElementExpression };
+export interface TLabeledElementExpression extends _TLabeledElementExpression { constructor: { new (): TLabeledElementExpression }; }
+export var TLabeledElementExpression: { new (): TLabeledElementExpression };
 
 export type TLabeledElementReferenceExpression = string;
 type _TLabeledElementReferenceExpression = _TQualifiedName;
@@ -539,28 +539,28 @@ interface _TNavigationProperty extends BaseType {
 	OnDelete?: TOnDelete[];
 	ReferentialConstraint?: TReferentialConstraint[];
 }
-export interface TNavigationProperty extends _TNavigationProperty { constructor: { new(): TNavigationProperty }; }
-export var TNavigationProperty: { new(): TNavigationProperty };
+export interface TNavigationProperty extends _TNavigationProperty { constructor: { new (): TNavigationProperty }; }
+export var TNavigationProperty: { new (): TNavigationProperty };
 
 interface _TNavigationPropertyBinding extends BaseType {
 	Path: string;
 	Target: string;
 }
-export interface TNavigationPropertyBinding extends _TNavigationPropertyBinding { constructor: { new(): TNavigationPropertyBinding }; }
-export var TNavigationPropertyBinding: { new(): TNavigationPropertyBinding };
+export interface TNavigationPropertyBinding extends _TNavigationPropertyBinding { constructor: { new (): TNavigationPropertyBinding }; }
+export var TNavigationPropertyBinding: { new (): TNavigationPropertyBinding };
 
 interface _TNullExpression extends BaseType {
 	Annotation?: AnnotationType[];
 }
-export interface TNullExpression extends _TNullExpression { constructor: { new(): TNullExpression }; }
-export var TNullExpression: { new(): TNullExpression };
+export interface TNullExpression extends _TNullExpression { constructor: { new (): TNullExpression }; }
+export var TNullExpression: { new (): TNullExpression };
 
 interface _TOnDelete extends BaseType {
 	Action: TOnDeleteAction;
 	Annotation?: AnnotationType[];
 }
-export interface TOnDelete extends _TOnDelete { constructor: { new(): TOnDelete }; }
-export var TOnDelete: { new(): TOnDelete };
+export interface TOnDelete extends _TOnDelete { constructor: { new (): TOnDelete }; }
+export var TOnDelete: { new (): TOnDelete };
 
 export type TOnDeleteAction = ('Cascade' | 'None' | 'SetDefault' | 'SetNull');
 interface _TOnDeleteAction extends Primitive._string { content: TOnDeleteAction; }
@@ -603,8 +603,8 @@ interface _TOneChildExpression extends BaseType {
 	TimeOfDay: string;
 	UrlRef: TOneChildExpression;
 }
-export interface TOneChildExpression extends _TOneChildExpression { constructor: { new(): TOneChildExpression }; }
-export var TOneChildExpression: { new(): TOneChildExpression };
+export interface TOneChildExpression extends _TOneChildExpression { constructor: { new (): TOneChildExpression }; }
+export var TOneChildExpression: { new (): TOneChildExpression };
 
 export type TPath = string;
 type _TPath = Primitive._string;
@@ -633,15 +633,15 @@ interface _TProperty extends BaseType {
 	Unicode?: boolean;
 	Annotation?: AnnotationType[];
 }
-export interface TProperty extends _TProperty { constructor: { new(): TProperty }; }
-export var TProperty: { new(): TProperty };
+export interface TProperty extends _TProperty { constructor: { new (): TProperty }; }
+export var TProperty: { new (): TProperty };
 
 interface _TPropertyRef extends BaseType {
 	Alias?: string;
 	Name: string;
 }
-export interface TPropertyRef extends _TPropertyRef { constructor: { new(): TPropertyRef }; }
-export var TPropertyRef: { new(): TPropertyRef };
+export interface TPropertyRef extends _TPropertyRef { constructor: { new (): TPropertyRef }; }
+export var TPropertyRef: { new (): TPropertyRef };
 
 interface _TPropertyValue extends BaseType {
 	$AnnotationPath?: string;
@@ -699,8 +699,8 @@ interface _TPropertyValue extends BaseType {
 	TimeOfDay?: string;
 	UrlRef?: TOneChildExpression;
 }
-export interface TPropertyValue extends _TPropertyValue { constructor: { new(): TPropertyValue }; }
-export var TPropertyValue: { new(): TPropertyValue };
+export interface TPropertyValue extends _TPropertyValue { constructor: { new (): TPropertyValue }; }
+export var TPropertyValue: { new (): TPropertyValue };
 
 export type TQualifiedName = string;
 type _TQualifiedName = Primitive._string;
@@ -710,16 +710,16 @@ interface _TRecordExpression extends BaseType {
 	Annotation?: AnnotationType[];
 	PropertyValue?: TPropertyValue[];
 }
-export interface TRecordExpression extends _TRecordExpression { constructor: { new(): TRecordExpression }; }
-export var TRecordExpression: { new(): TRecordExpression };
+export interface TRecordExpression extends _TRecordExpression { constructor: { new (): TRecordExpression }; }
+export var TRecordExpression: { new (): TRecordExpression };
 
 interface _TReferentialConstraint extends BaseType {
 	Property: string;
 	ReferencedProperty: string;
 	Annotation?: AnnotationType[];
 }
-export interface TReferentialConstraint extends _TReferentialConstraint { constructor: { new(): TReferentialConstraint }; }
-export var TReferentialConstraint: { new(): TReferentialConstraint };
+export interface TReferentialConstraint extends _TReferentialConstraint { constructor: { new (): TReferentialConstraint }; }
+export var TReferentialConstraint: { new (): TReferentialConstraint };
 
 export type TScaleFacet = string;
 type _TScaleFacet = Primitive._string;
@@ -733,8 +733,8 @@ interface _TSingleton extends BaseType {
 	Annotation?: AnnotationType[];
 	NavigationPropertyBinding?: TNavigationPropertyBinding[];
 }
-export interface TSingleton extends _TSingleton { constructor: { new(): TSingleton }; }
-export var TSingleton: { new(): TSingleton };
+export interface TSingleton extends _TSingleton { constructor: { new (): TSingleton }; }
+export var TSingleton: { new (): TSingleton };
 
 export type TSridFacet = string;
 type _TSridFacet = Primitive._string;
@@ -755,8 +755,8 @@ interface _TTerm extends BaseType {
 	Type: string;
 	Annotation?: AnnotationType[];
 }
-export interface TTerm extends _TTerm { constructor: { new(): TTerm }; }
-export var TTerm: { new(): TTerm };
+export interface TTerm extends _TTerm { constructor: { new (): TTerm }; }
+export var TTerm: { new (): TTerm };
 
 export type TTimeOfDayConstantExpression = string;
 type _TTimeOfDayConstantExpression = _time;
@@ -799,8 +799,8 @@ interface _TTwoChildrenExpression extends BaseType {
 	TimeOfDay: string[];
 	UrlRef: TOneChildExpression[];
 }
-export interface TTwoChildrenExpression extends _TTwoChildrenExpression { constructor: { new(): TTwoChildrenExpression }; }
-export var TTwoChildrenExpression: { new(): TTwoChildrenExpression };
+export interface TTwoChildrenExpression extends _TTwoChildrenExpression { constructor: { new (): TTwoChildrenExpression }; }
+export var TTwoChildrenExpression: { new (): TTwoChildrenExpression };
 
 interface _TTypeDefinition extends BaseType {
 	MaxLength?: string;
@@ -812,8 +812,8 @@ interface _TTypeDefinition extends BaseType {
 	Unicode?: boolean;
 	Annotation?: AnnotationType[];
 }
-export interface TTypeDefinition extends _TTypeDefinition { constructor: { new(): TTypeDefinition }; }
-export var TTypeDefinition: { new(): TTypeDefinition };
+export interface TTypeDefinition extends _TTypeDefinition { constructor: { new (): TTypeDefinition }; }
+export var TTypeDefinition: { new (): TTypeDefinition };
 
 export type TTypeName = string;
 type _TTypeName = Primitive._string;
