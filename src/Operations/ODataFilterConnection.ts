@@ -1,4 +1,4 @@
-import { ODataFilterBuilder } from './ODataFilterConnection';
+import { ODataFilterBuilder } from './ODataFilterBuilder';
 import { ODataFilterExpression } from './ODataFilterExpression';
 export type FilterArgs<T, K> = [K, string];
 export type FilterSegment<T> = ODataFilterExpression<T> | ODataFilterConnection<T>;
