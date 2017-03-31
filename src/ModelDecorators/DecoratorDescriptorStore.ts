@@ -1,8 +1,4 @@
-
-export class DecoratorDescriptor {
-    Object: any;
-    Entries: Object[];
-}
+import { DecoratorDescriptor } from './DecoratorDescriptor';
 
 export class DecoratorDescriptorStore {
 
@@ -36,8 +32,8 @@ export class DecoratorDescriptorStore {
         const found = this.GetDescriptor(entityTypeClass);
         if (!found) {
             this.descriptorsInternal.push({
+                Entries: [descriptorEntry],
                 Object: entityTypeClass,
-                Entries: [descriptorEntry]
             });
 
         } else {

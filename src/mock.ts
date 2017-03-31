@@ -1,36 +1,37 @@
-import Endpoint from "./endpoint";
-import * as Express from "express";
-import { Builder } from "./EndpointModel";
-import { PrimaryKey, Property, ForeignKey } from "./ModelDecorators";
-import { InMemoryStore } from "./EntityStores";
+import * as Express from 'express';
+import Endpoint from './endpoint';
+import { Builder } from './EndpointModel';
+import { InMemoryStore } from './EntityStores';
+import { ForeignKey, PrimaryKey, Property } from './ModelDecorators';
 const app = Express();
 
-const builder = new Builder("Api");
+const builder = new Builder('Api');
 
 class OtherClass {
     @PrimaryKey
-    id: number;
-    val: string;
+    public id: number;
+    public val: string;
 }
+// tslint:disable-next-line:max-classes-per-file
 class Alma {
 
     @PrimaryKey
-    id: number;
+    public id: number;
 
     @Property
-    a: string;
-    b: string;
+    public a: string;
+    public b: string;
 
-    otherKey: number;
-    @ForeignKey(OtherClass, "otherKey")
-    otherClass: OtherClass;
+    public otherKey: number;
+    @ForeignKey(OtherClass, 'otherKey')
+    public otherClass: OtherClass;
 }
 
 builder.EntityType(OtherClass);
 builder.EntityType(Alma);
 
-builder.EntitySet(OtherClass, "others");
-builder.EntitySet(Alma, "almák");
+builder.EntitySet(OtherClass, 'others');
+builder.EntitySet(Alma, 'almák');
 
 const endpoint = new Endpoint(app, builder);
 
@@ -39,7 +40,7 @@ endpoint.GetApiRootBody.toString();
 const almaStore = InMemoryStore.CreateWithId(Alma);
 
 almaStore.GetSingleAsync({
-    PrimaryKey: 1
+    PrimaryKey: 1,
 });
 
 app.listen(1111);

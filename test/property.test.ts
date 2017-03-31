@@ -1,41 +1,43 @@
-import * as chai from "chai";
-import { suite, test } from "mocha-typescript";
-import { PrimaryKey, Properties, Property } from "../src/ModelDecorators";
-
+import * as chai from 'chai';
+import { suite, test } from 'mocha-typescript';
+import { PrimaryKey, Properties, Property } from '../src/ModelDecorators';
 
 class NoPropertiesDefined {
-    Id: number;
-    Name: string;
-    Prop: any;
+    public Id: number;
+    public Name: string;
+    public Prop: any;
 }
 
+// tslint:disable-next-line:max-classes-per-file
 class OneProperty {
-    Id: number;
+    public Id: number;
 
     @Property
-    Prop1: string;
+    public Prop1: string;
 }
 
+// tslint:disable-next-line:max-classes-per-file
 class TwoProperties {
     @PrimaryKey
-    Id: number;
+    public Id: number;
     @Property
-    Prop1: string;
+    public Prop1: string;
     @Property
-    Prop2: string;
+    public Prop2: string;
 }
 
-@suite("OData Property decorator and store tests")
+// tslint:disable-next-line:max-classes-per-file
+@suite('OData Property decorator and store tests')
 export class PropertyTests {
 
-    @test("HasFor should return false if model doesn't have properties declared")
-    hasForShouldReturnFalse() {
+    @test('HasFor should return false if model doesn\'t have properties declared')
+    public hasForShouldReturnFalse() {
         const result = Properties.HasFor(NoPropertiesDefined);
         chai.expect(result).equals(false);
     }
 
-    @test("HasFor should return true if model has properties declared")
-    hasForShouldReturTrue() {
+    @test('HasFor should return true if model has properties declared')
+    public hasForShouldReturTrue() {
         const result = Properties.HasFor(OneProperty);
         chai.expect(result).equals(true);
 
@@ -43,20 +45,20 @@ export class PropertyTests {
         chai.expect(res2).equals(true);
     }
 
-    @test("Should get an empty array if no property defined")
-    shouldGetEmptyArrayIfPropertyNotSpecified() {
+    @test('Should get an empty array if no property defined')
+    public shouldGetEmptyArrayIfPropertyNotSpecified() {
         const result = Properties.GetFor(NoPropertiesDefined);
         chai.expect(result.length).equals(0);
     }
 
-    @test("Should get one if a property is defined")
-    shouldGetOne() {
+    @test('Should get one if a property is defined')
+    public shouldGetOne() {
         const result = Properties.GetFor(OneProperty);
         chai.expect(result.length).equals(1);
     }
 
-    @test("Should get 2 if 2 property and a primary key is defined")
-    shouldGetTwo() {
+    @test('Should get 2 if 2 property and a primary key is defined')
+    public shouldGetTwo() {
         const result = Properties.GetFor(TwoProperties);
         chai.expect(result.length).equals(2);
     }

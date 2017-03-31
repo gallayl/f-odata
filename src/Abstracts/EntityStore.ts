@@ -1,5 +1,7 @@
-import { ForeignKeyDescriptorEntry, ForeignKeys, ODataPropertyDesrciptorEntry, PrimaryKeys, Properties } from "../ModelDecorators";
-import { ODataGetOperation, ODataQuery } from "../Operations";
+import {
+    ForeignKeyDescriptorEntry, ForeignKeys, ODataPropertyDesrciptorEntry
+    , PrimaryKeys, Properties } from '../ModelDecorators';
+import { ODataGetOperation, ODataQuery } from '../Operations';
 
 export abstract class EntityStore<EntityType, PrimaryKeyType>{
 

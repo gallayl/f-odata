@@ -1,1 +1,1 @@
-export * from "./InMemoryStore";
+export * from './InMemoryStore';

@@ -1,38 +1,10 @@
 {
-    "jsRules": {
-        "quotemark": [
-            "single"
-        ]
-    },
+    "extends": "tslint:latest",
     "rules": {
-        "quotemark": [
-            "single"
-        ],
-        "no-var-keyword": false,
-        "indent": [
-            true
-        ],
-        "no-trailing-whitespace": true,
-        "curly": true,
-        "jsdoc-format": true,
-        "interface-name": [
-            "always-prefix",
-            true
-        ],
-        "class-name": true,
-        "prefer-const": true,
-        "arrow-parens": true,
-        "arrow-return-shorthand": true,
-        "ordered-imports": [
-            true
-        ],
-        "prefer-method-signature": true,
-        "no-string-throw": true,
-        "no-unused-variable": [
-            true
-        ],
-        "cyclomatic-complexity": [
-            true
-        ]
+        "member-ordering": [false],
+        "quotemark": {
+            "options": "single",
+            "severity": "warning"
+        }
     }
 }

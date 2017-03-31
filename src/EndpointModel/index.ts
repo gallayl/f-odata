@@ -1,2 +1,2 @@
-export * from "./Builder";
-export * from "./EdmTypes";
+export * from './Builder';
+export * from './EdmTypes';

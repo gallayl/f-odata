@@ -24,7 +24,6 @@ export enum EdmType {
     /** Date and time with a time-zone offset, no leap seconds */
     DateTimeOffset,
 
-
     /** Numeric values with fixed precision and scale */
     Decimal,
 
@@ -107,6 +106,6 @@ export enum EdmType {
     GeometryMultiPolygon,
 
     /** Collection of arbitrary Geometry values */
-    GeometryCollection
+    GeometryCollection,
 
 }

@@ -1,10 +1,6 @@
-import { EdmType } from "../EndpointModel/EdmTypes";
-import { DecoratorDescriptorStore } from "./DecoratorDescriptorStore";
-
-export class ODataPropertyDesrciptorEntry {
-    PropertyName: string;
-    EdmType: EdmType;
-}
+import { EdmType } from '../EndpointModel/EdmTypes';
+import { DecoratorDescriptorStore } from './DecoratorDescriptorStore';
+import { ODataPropertyDesrciptorEntry } from './ODataPropertyDescriptorEntry';
 
 function isODataPropertyDesrciptorEntry(obj: any): obj is ODataPropertyDesrciptorEntry {
     return obj.PropertyName !== undefined && obj.EdmType !== undefined;
@@ -16,10 +12,11 @@ export class Properties {
      * @param entityTypeClass The model class to get the properties decorated with @Property
      */
     public static GetFor<T>(entityTypeClass: { new (): T }): ODataPropertyDesrciptorEntry[] {
-        try{
+        try {
             const found = DecoratorDescriptorStore.GetDescriptor(entityTypeClass);
-            return found.Entries.filter((a) => isODataPropertyDesrciptorEntry(a)).map((a) => <ODataPropertyDesrciptorEntry>a);
-        } catch (e){
+            return found.Entries.filter((a) =>
+                isODataPropertyDesrciptorEntry(a)).map((a) =>  a as ODataPropertyDesrciptorEntry);
+        } catch (e) {
             return [];
         }
     }
@@ -37,9 +34,9 @@ export class Properties {
 /**
  * Decorator for an OData property
  */
-export function Property(target: Object, propertyKey: string) {
-    DecoratorDescriptorStore.Add(<any>target, <ODataPropertyDesrciptorEntry>{
+export function Property(target: object, propertyKey: string) {
+    DecoratorDescriptorStore.Add( target as any,  {
+        EdmType: EdmType.Unknown,
         PropertyName: propertyKey,
-        EdmType: EdmType.Unknown
-    });
+    } as ODataPropertyDesrciptorEntry);
 }

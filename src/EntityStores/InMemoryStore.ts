@@ -1,12 +1,13 @@
-import { EntityStore } from "../Abstracts/EntityStore";
-import { ODataGetOperation, ODataQuery } from "../Operations";
+import { EntityStore } from '../Abstracts/EntityStore';
+import { ODataGetOperation, ODataQuery } from '../Operations';
 
 export class InMemoryStore<EntityType, PrimaryKeyType, Fields> extends EntityStore<EntityType, PrimaryKeyType> {
 
     private Entities: EntityType[] = [];
 
-    public async GetSingleAsync(getOperation: ODataGetOperation<EntityType, PrimaryKeyType, Fields>): Promise<EntityType> {
-        return this.Entities.find((a) => <PrimaryKeyType>a[this.PrimaryKeyName] === getOperation.PrimaryKey);
+    public async GetSingleAsync(getOperation: ODataGetOperation<EntityType,
+        PrimaryKeyType, Fields>): Promise<EntityType> {
+        return this.Entities.find((a) => a[this.PrimaryKeyName] as PrimaryKeyType === getOperation.PrimaryKey);
     }
     public async GetCollectionAsync(q?: ODataQuery<EntityType, Fields>): Promise<EntityType[]> {
         return this.Entities;
@@ -15,9 +16,10 @@ export class InMemoryStore<EntityType, PrimaryKeyType, Fields> extends EntitySto
         this.Entities.push(entity);
         return entity;
     }
-    public async PatchAsync(primaryKey: PrimaryKeyType, delta: Partial<EntityType>): Promise<EntityType> {
+    public async PatchAsync(primaryKey: PrimaryKeyType,
+                            delta: Partial<EntityType>): Promise<EntityType> {
         const e = await this.GetSingleAsync({ PrimaryKey: primaryKey });
-        for (var prop in delta) {
+        for (const prop in delta) {
             if (delta[prop]) {
                 e[prop] = delta[prop];
             }

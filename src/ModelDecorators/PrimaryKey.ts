@@ -1,11 +1,8 @@
-import { DecoratorDescriptorStore } from "./DecoratorDescriptorStore";
-
-class PrimaryKeyDescriptorEntry {
-    PrimaryKey: string;
-}
+import { DecoratorDescriptorStore } from './DecoratorDescriptorStore';
+import {PrimaryKeyDescriptorEntry} from './PrimaryKeyDescriptorEntry';
 
 function isPrimaryKeyDescriptorEntry(descriptor: any): descriptor is PrimaryKeyDescriptorEntry {
-    return (<PrimaryKeyDescriptorEntry>descriptor).PrimaryKey !== undefined;
+    return (descriptor as PrimaryKeyDescriptorEntry).PrimaryKey !== undefined;
 }
 
 /**
@@ -22,7 +19,7 @@ export class PrimaryKeys {
         if (!descriptor) {
             throw new Error(`Descriptor not registered for '${entityTypeClass.name}'`);
         }
-        const entry = <PrimaryKeyDescriptorEntry>descriptor.Entries.find((a) => isPrimaryKeyDescriptorEntry(a));
+        const entry =  descriptor.Entries.find((a) => isPrimaryKeyDescriptorEntry(a)) as PrimaryKeyDescriptorEntry;
         if (!entry) {
             throw new Error(`No primary key registered for '${entityTypeClass.name}'`);
         }
@@ -43,8 +40,8 @@ export class PrimaryKeys {
  * @param target The target obect
  * @param propertyKey The property that should be a primary key
  */
-export function PrimaryKey(target: Object, propertyKey: string) {
-    DecoratorDescriptorStore.Add(<any>target, <PrimaryKeyDescriptorEntry>{
-        PrimaryKey: propertyKey
-    });
+export function PrimaryKey(target: object, propertyKey: string) {
+    DecoratorDescriptorStore.Add( target as any,  {
+        PrimaryKey: propertyKey,
+    } as PrimaryKeyDescriptorEntry);
 }

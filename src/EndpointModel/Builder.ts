@@ -1,6 +1,7 @@
-import { SchemaType, TEntityKeyElement, TEntitySet, TEntityType, TProperty } from "../../xmlns/docs.oasis-open.org/odata/ns/edm";
-import { PrimaryKeys, Properties } from "../ModelDecorators";
-import { DecoratorDescriptorStore } from "../ModelDecorators/DecoratorDescriptorStore";
+import { SchemaType, TEntityKeyElement } from '../../xmlns/docs.oasis-open.org/odata/ns/edm';
+import { TEntitySet, TEntityType, TProperty } from '../../xmlns/docs.oasis-open.org/odata/ns/edm';
+import { PrimaryKeys, Properties } from '../ModelDecorators';
+import { DecoratorDescriptorStore } from '../ModelDecorators/DecoratorDescriptorStore';
 
 /**
  * The Builder class provides you an API to create OData ShcemaTypes
@@ -21,11 +22,11 @@ export class Builder {
      */
     public GetModel(): SchemaType {
         return {
-            Namespace: this.NameSpaceRoot,
-            EntityType: this.EntityTypes,
             EntityContainer: [{
-                EntitySet: this.EntitySets
-            }]
+                EntitySet: this.EntitySets,
+            }],
+            EntityType: this.EntityTypes,
+            Namespace: this.NameSpaceRoot,
         } as SchemaType;
     }
 
@@ -45,24 +46,25 @@ export class Builder {
 
         const entityType = {
             Name: entityTypeName,
+            NavigationProperty: [],
             Property: [],
-            NavigationProperty: []
         } as TEntityType;
 
         entityType.Key = [{
             PropertyRef: [
-                { "Name": keyfield },
-            ]
+                { Name: keyfield },
+            ],
         }] as TEntityKeyElement[];
 
         const odataProperties = Properties.GetFor(entityTypeClass);
-        const tProperties = odataProperties.map((prop) => <TProperty>{
-            Name: prop.PropertyName,
-            Type: prop.EdmType.toString()
+        const tProperties = odataProperties.map((prop) => {
+            return {
+                Name: prop.PropertyName,
+                Type: prop.EdmType.toString(),
+            } as TProperty;
         });
 
         entityType.Property = tProperties;
-
 
         this.EntityTypes.push(entityType);
         return entityType;
@@ -70,7 +72,8 @@ export class Builder {
 
     /**
      * Gets an EntitySet with a specified name for an EntityType. Will be registered to the builder if neccessary
-     * @param entityTypeClass entityTypeClass The model class for the EntitySet. Register as an EntityType before adding an EntitySet
+     * @param entityTypeClass entityTypeClass The model class for the EntitySet.
+     *  Register as an EntityType before adding an EntitySet
      * @param entitySetName The collection name (will be part of the API URL)
      */
     public EntitySet<T>(entityTypeClass: { new (): T }, entitySetName: string): TEntitySet {
@@ -81,7 +84,7 @@ export class Builder {
 
         if (existing) {
             if (existing.EntityType !== entityTypeName) {
-                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}. 
+                throw new Error(`Mismatch on registering entitySet '${entitySetName}', with type '${entityTypeName}.
                 Already registered to type '${existing.EntityType}'`);
             }
             return existing;
@@ -92,10 +95,10 @@ export class Builder {
             throw new Error(`Entity type not yet added for type '${entityTypeName}', please add it first.`);
         }
 
-        const newEntitySet = <TEntitySet>{
-            Name: entitySetName,
+        const newEntitySet = {
             EntityType: entityTypeName,
-        };
+            Name: entitySetName,
+        } as TEntitySet;
         this.EntitySets.push(newEntitySet);
         return newEntitySet;
     }

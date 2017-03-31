@@ -1,31 +1,33 @@
-import * as chai from "chai";
-import { suite, test } from "mocha-typescript";
-import { Builder } from "../src/EndpointModel";
-import chaiHttp = require("chai-http");
-import { PrimaryKey, Property } from "../src/ModelDecorators";
+import * as chai from 'chai';
+import { suite, test } from 'mocha-typescript';
+import { Builder } from '../src/EndpointModel';
+import chaiHttp = require('chai-http');
+import { PrimaryKey, Property } from '../src/ModelDecorators';
 
 class A {
     @PrimaryKey
-    Id: number;
-    Name: string;
+    public Id: number;
+    public Name: string;
 }
 
+// tslint:disable-next-line:max-classes-per-file
 class B {
     @PrimaryKey
-    Id: number;
-    Name: any;
+    public Id: number;
+    public Name: any;
 }
-
+// tslint:disable-next-line:max-classes-per-file
 class WithoutKey {
-    Id: number;
+    public Id: number;
 }
-
+// tslint:disable-next-line:max-classes-per-file
 class WithoutKeyWithProperty {
     @Property
-    prop1: string;
+    public prop1: string;
 }
 
-@suite("OData Endpoint builder tests")
+// tslint:disable-next-line:max-classes-per-file
+@suite('OData Endpoint builder tests')
 export class EndpointBuilderTests {
 
     private b: Builder;
@@ -34,28 +36,28 @@ export class EndpointBuilderTests {
         chai.use(chaiHttp);
     }
 
-    before() {
-        this.b = new Builder("api");
+    public before() {
+        this.b = new Builder('api');
     }
 
-    @test("Register EntityType 'A'")
-    RegisterClassA() {
-        new Builder("api").EntityType(A);
+    @test('Register EntityType \'A\'')
+    public RegisterClassA() {
+        new Builder('api').EntityType(A);
     }
 
-    @test("Register EntityType 'B'")
-    RegisterClassB() {
-        new Builder("api").EntityType(B);
+    @test('Register EntityType \'B\'')
+    public RegisterClassB() {
+        new Builder('api').EntityType(B);
     }
 
-    @test("Register EntityType 'A' and EntityType 'B' into the same builder")
-    RegisterClassAB() {
+    @test('Register EntityType \'A\' and EntityType \'B\' into the same builder')
+    public RegisterClassAB() {
         this.b.EntityType(A);
         this.b.EntityType(B);
     }
 
-    @test("Register EntityType without key field should throw error")
-    RegisterClassAWithoutKeyThrowError() {
+    @test('Register EntityType without key field should throw error')
+    public RegisterClassAWithoutKeyThrowError() {
         chai.assert.throw(() => {
             this.b.EntityType(WithoutKey);
         }, Error);
@@ -65,56 +67,56 @@ export class EndpointBuilderTests {
         }, Error);
     }
 
-    @test("Register EntityType 'A' and get EntityType 'A' without keyfield")
-    RegisterSetA() {
+    @test('Register EntityType \'A\' and get EntityType \'A\' without keyfield')
+    public RegisterSetA() {
         this.b.EntityType(A);
         const aType = this.b.EntityType(A);
-        chai.expect(aType.Name).equals("A");
-        chai.expect(aType.Key[0].PropertyRef[0].Name).equals("Id");
+        chai.expect(aType.Name).equals('A');
+        chai.expect(aType.Key[0].PropertyRef[0].Name).equals('Id');
     }
 
-    @test("Register EntityType 'A' and register EntitySet 'As'")
-    RegisterAandAs() {
+    @test('Register EntityType \'A\' and register EntitySet \'As\'')
+    public RegisterAandAs() {
         this.b.EntityType(A);
-        this.b.EntitySet(A, "As");
+        this.b.EntitySet(A, 'As');
     }
 
-    @test("Register EntityType 'A', 'B' and EntitySet 'As' and 'Bs'")
-    RegisterABandAsBs() {
+    @test('Register EntityType \'A\', \'B\' and EntitySet \'As\' and \'Bs\'')
+    public RegisterABandAsBs() {
         this.b.EntityType(A);
         this.b.EntityType(B);
-        this.b.EntitySet(A, "As");
-        this.b.EntitySet(B, "Bs");
+        this.b.EntitySet(A, 'As');
+        this.b.EntitySet(B, 'Bs');
     }
 
-    @test("Register EntityType 'A', EntitySet 'As' and get EntitySet 'As'")
-    RegisterAandAsAndGetA() {
+    @test('Register EntityType \'A\', EntitySet \'As\' and get EntitySet \'As\'')
+    public RegisterAandAsAndGetA() {
         this.b.EntityType(A);
-        this.b.EntitySet(A, "As");
+        this.b.EntitySet(A, 'As');
 
         const type = this.b.EntityType(A);
-        const set = this.b.EntitySet(A, "As");
+        const set = this.b.EntitySet(A, 'As');
 
-        chai.expect(set.Name).equals("As");
+        chai.expect(set.Name).equals('As');
         chai.expect(set.EntityType).equals(type.Name);
     }
 
-    @test("Register EntitySet for entity 'A' without defining EntityType 'A' should throw an error")
-    RegisterAsWithoutAShouldThrow() {
+    @test('Register EntitySet for entity \'A\' without defining EntityType \'A\' should throw an error')
+    public RegisterAsWithoutAShouldThrow() {
         chai.expect(() => {
-            this.b.EntitySet(A, "As");
+            this.b.EntitySet(A, 'As');
         }).throw(Error);
     }
 
-    @test("Register Type 'A','B', set 'As' and register B into As should throw mismatch error")
-    RegisterEntitySetDifferentTypeMismatch() {
-        const b = new Builder("api");
+    @test('Register Type \'A\',\'B\', set \'As\' and register B into As should throw mismatch error')
+    public RegisterEntitySetDifferentTypeMismatch() {
+        const b = new Builder('api');
         b.EntityType(A);
         b.EntityType(B);
-        b.EntitySet(A, "As");
+        b.EntitySet(A, 'As');
 
         chai.expect(() => {
-            b.EntitySet(B, "As");
+            b.EntitySet(B, 'As');
         }).to.throw(Error);
     }
 }

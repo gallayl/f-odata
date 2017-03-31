@@ -1,5 +1,5 @@
-import * as Express from "express";
-import { Builder } from "./EndpointModel";
+import * as Express from 'express';
+import { Builder } from './EndpointModel';
 
 export default class Endpoint {
 
@@ -18,19 +18,19 @@ export default class Endpoint {
     }
 
     // todo: from modelbuilder
-    private apiRootBody: string = "ApiRootBody";
+    private apiRootBody: string = 'ApiRootBody';
 
     private router: Express.Router = Express.Router();
 
     private registerExpressRoute(expressAppRef: Express.Application) {
-        this.router.get("/", (req, resp) => {
+        this.router.get('/', (req, resp) => {
             resp
                 // .set("Content-Type", "text/xml")
                 .status(200)
                 .send(this.GetApiRootBody());
         });
 
-        this.router.get("/([\$])metadata", (req, resp) => {
+        this.router.get('/([\$])metadata', (req, resp) => {
             resp
                 // .set("Content-Type", "text/xml")
                 .status(200)
@@ -42,7 +42,8 @@ export default class Endpoint {
     }
 
     /**
-     * Constructs an OData endpoint from the specified models and registers it to an Express application to a specific route
+     * Constructs an OData endpoint from the specified models
+     * and registers it to an Express application to a specific route
      * @param expressAppRef The Express application reference to register the OData Endpoint
      * @param route The root for the OData endpoint (e.g. 'odata.svc')
      * @param ModelBuilder The OData modelbuilder which defines what entities will be registered into the endpoint
