@@ -57,12 +57,10 @@ export class Builder {
         }] as TEntityKeyElement[];
 
         const odataProperties = Properties.GetFor(entityTypeClass);
-        const tProperties = odataProperties.map((prop) => {
-            return {
+        const tProperties = odataProperties.map<TProperty>((prop) => ({
                 Name: prop.PropertyName,
                 Type: prop.EdmType.toString(),
-            } as TProperty;
-        });
+            } as TProperty));
 
         entityType.Property = tProperties;
 
