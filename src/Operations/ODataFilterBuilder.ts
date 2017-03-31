@@ -1,4 +1,4 @@
-import { FilterSegment } from './ODataFilterBuilder';
+import { FilterSegment } from './ODataFilterConnection';
 import { ODataFilterExpression } from './ODataFilterExpression';
 
 export class ODataFilterBuilder<T>{
