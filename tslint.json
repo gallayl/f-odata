@@ -6,5 +6,11 @@
             "options": "single",
             "severity": "warning"
         }
+    },
+    "jsRules": {
+        "no-require-imports": false,
+        "quotemark": {
+            "options": "single"
+        }
     }
 }
