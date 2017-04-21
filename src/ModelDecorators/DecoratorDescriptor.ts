@@ -1,4 +1,6 @@
+import {DescriptorEntryType} from './';
+
 export class DecoratorDescriptor {
     public Object: any;
-    public Entries: Array<object>;
+    public Entries: DescriptorEntryType[];
 }
