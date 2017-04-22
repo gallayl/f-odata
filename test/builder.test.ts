@@ -2,7 +2,8 @@ import * as chai from 'chai';
 import { suite, test } from 'mocha-typescript';
 import { Builder } from '../src/EndpointModel';
 import chaiHttp = require('chai-http');
-import { PrimaryKey, Property } from '../src/ModelDecorators';
+import { PrimaryKey, PrimaryKeyDescriptorEntry, Property } from '../src/ModelDecorators';
+import { DecoratorDescriptorStore } from '../src/ModelDecorators/DecoratorDescriptorStore';
 
 class A {
     @PrimaryKey

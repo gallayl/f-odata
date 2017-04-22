@@ -2,7 +2,7 @@ import { EdmType } from '../EndpointModel/EdmTypes';
 import { DecoratorDescriptorStore } from './DecoratorDescriptorStore';
 import { ODataPropertyDesrciptorEntry } from './ODataPropertyDescriptorEntry';
 
-function isODataPropertyDesrciptorEntry(obj: any): obj is ODataPropertyDesrciptorEntry {
+export function isODataPropertyDesrciptorEntry(obj: any): obj is ODataPropertyDesrciptorEntry {
     return obj.PropertyName !== undefined && obj.EdmType !== undefined;
 }
 
@@ -35,8 +35,6 @@ export class Properties {
  * Decorator for an OData property
  */
 export function Property(target: object, propertyKey: string) {
-    DecoratorDescriptorStore.Add( target as any,  {
-        EdmType: EdmType.Unknown,
-        PropertyName: propertyKey,
-    } as ODataPropertyDesrciptorEntry);
+    DecoratorDescriptorStore.Add( target as any,
+    new ODataPropertyDesrciptorEntry(propertyKey, EdmType.Unknown));
 }

@@ -1,4 +1,5 @@
 import { DecoratorDescriptor } from './DecoratorDescriptor';
+import { DescriptorEntryType } from './DescriptorEntryType';
 
 export class DecoratorDescriptorStore {
 
@@ -28,14 +29,11 @@ export class DecoratorDescriptorStore {
      * Adds an entry for the Object if it not exist, appends the Entries otherwise.
      * @param newValue The new Object and Key values
      */
-    public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: any) {
+    public static Add<T>(entityTypeClass: { new (): T }, descriptorEntry: DescriptorEntryType) {
         const found = this.GetDescriptor(entityTypeClass);
         if (!found) {
-            this.descriptorsInternal.push({
-                Entries: [descriptorEntry],
-                Object: entityTypeClass,
-            });
-
+            const entry = new DecoratorDescriptor(entityTypeClass, [descriptorEntry]);
+            this.descriptorsInternal.push(entry);
         } else {
             found.Entries.push(descriptorEntry);
         }

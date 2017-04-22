@@ -1,5 +1,7 @@
 export * from './testhelpers';
 
+export * from './decoratordescriptorstore.test';
+
 export * from './endpoint.test';
 export * from './builder.test';
 
