@@ -1,6 +1,6 @@
 import { SchemaType, TEntityKeyElement } from '../../xmlns/docs.oasis-open.org/odata/ns/edm';
-import { TEntitySet, TEntityType, TProperty } from '../../xmlns/docs.oasis-open.org/odata/ns/edm';
-import { PrimaryKeys, Properties } from '../ModelDecorators';
+import { TEntitySet, TEntityType, TProperty, TNavigationProperty } from '../../xmlns/docs.oasis-open.org/odata/ns/edm';
+import { PrimaryKeys, Properties, ForeignKeys } from '../ModelDecorators';
 import { DecoratorDescriptorStore } from '../ModelDecorators/DecoratorDescriptorStore';
 
 /**
@@ -63,6 +63,14 @@ export class Builder {
             } as TProperty));
 
         entityType.Property = tProperties;
+
+        const odataForeignKeys = ForeignKeys.GetFor(entityTypeClass);
+        const tNavigationProperties = odataForeignKeys.map<TNavigationProperty>((k) => ({
+            Name: k.ForeignKeyField,
+            Type: k.ReferenceName
+        } as TNavigationProperty));
+
+        entityType.NavigationProperty = tNavigationProperties;
 
         this.EntityTypes.push(entityType);
         return entityType;
